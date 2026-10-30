@@ -4,3 +4,8 @@
 
 /* Keep project descriptions aligned on both sides for a cleaner portfolio layout. */
 .projects-grid .card .body > p:not(.tags):not(.tools){text-align:justify;text-justify:inter-word;hyphens:auto;overflow-wrap:break-word}
+
+/* Keep embedded project videos within their card, including on mobile. */
+.projects-grid .card .body{min-width:0}
+.projects-grid .card .project-video{width:100%;max-width:100%;min-width:0;overflow:hidden}
+.projects-grid .card .project-video video{display:block;width:100%!important;max-width:100%;min-width:0;height:auto!important;box-sizing:border-box;object-fit:contain}
