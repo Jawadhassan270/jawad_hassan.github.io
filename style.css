@@ -60,9 +60,3 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 @media(max-width:800px){.hero{grid-template-columns:1fr;padding:70px 0}.hero-visual{max-width:620px;width:100%;aspect-ratio:1.6/1}.projects-grid{grid-template-columns:1fr}.media{aspect-ratio:2.2/1}.section{padding:72px 0}}
 @media(max-width:480px){.container{width:calc(100% - 32px)}.hero{padding:55px 0}.hero h1{font-size:clamp(3rem,13vw,4.1rem)}.hero-visual{aspect-ratio:1.15/1}.hero-visual img{padding:15px 15px 85px}.media{aspect-ratio:1.8/1}.body{padding:20px}.body p{font-size:.92rem}.projects-grid .card .body>p:not(.tags):not(.tools){text-align:left;hyphens:none}.section h2{font-size:2rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.card,.btn{transition:none}.card:hover,.btn:hover{transform:none}}
-
-/* Homepage: keep original circular UAV mark and wording, refine shape and palette. */
-.hero-mark{width:min(100%,390px);aspect-ratio:1;border-radius:50%;position:relative;isolation:isolate;margin-inline:auto;overflow:hidden;background:radial-gradient(circle at 35% 30%,#e9fbfb 0%,#d5eff0 38%,#b4dfe4 73%,#84c1ca 100%);border:1px solid #93c9d0;box-shadow:inset 0 0 0 12px rgba(255,255,255,.3),0 24px 65px rgba(14,74,92,.15);color:#123849;font-size:clamp(2.2rem,4vw,3.25rem);letter-spacing:.13em;text-align:center}
-.hero-mark:before{content:"";position:absolute;inset:24px;border:1px solid rgba(255,255,255,.72);border-radius:50%;z-index:-1}
-.hero-mark span{font-size:.62rem;font-weight:800;letter-spacing:.14em;color:#246b79;margin-top:8px}
-@media(max-width:800px){.hero-mark{width:min(78vw,340px);max-width:340px}}
