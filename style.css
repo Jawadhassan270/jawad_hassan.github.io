@@ -67,10 +67,13 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 .projects-grid .card .media-pair img{background:#fff}
 .projects-grid .card .media-pair img{object-fit:cover}
 
-/* Compact French/English selector, without changing existing portfolio layout. */
-.nav-controls{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.lang-switch{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--soft)}
-.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:35px;padding:5px 8px;border-radius:6px;font-size:.75rem;font-weight:800;line-height:1.2;text-decoration:none;color:var(--muted)}
-.lang-switch a:hover{color:var(--accent)}
-.lang-switch a[aria-current=page]{background:var(--dark);color:#fff}
-@media(max-width:800px){.nav-controls{gap:10px}.lang-switch a{padding:6px 8px}}
+/* Accessible two-language switch, placed beside the desktop navigation. */
+.nav-links{margin-left:auto}
+.nav-controls{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-left:32px}
+.lang-switch{display:inline-flex;align-items:center;gap:4px;padding:4px;border:1px solid #cbdde5;border-radius:12px;background:#f2f7f9;box-shadow:0 1px 3px rgba(13,32,48,.04)}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:42px;min-height:34px;padding:5px 10px;border-radius:8px;font-size:.78rem;font-weight:800;letter-spacing:.04em;line-height:1;text-decoration:none;color:#465a6b;transition:background-color .2s,color .2s,box-shadow .2s}
+.lang-switch a:hover:not([aria-current=page]){background:#ddebef;color:#087e8b}
+.lang-switch a[aria-current=page]{background:var(--dark);color:#fff;box-shadow:0 2px 6px rgba(10,25,42,.16);cursor:default}
+.lang-switch a:focus-visible{outline:3px solid #087e8b;outline-offset:2px}
+@media(max-width:800px){.nav-links{margin-left:0;top:76px}.nav-controls{margin-left:auto;gap:10px}.lang-switch a{min-width:40px;min-height:34px;padding:5px 8px}}
+@media(prefers-reduced-motion:reduce){.lang-switch a{transition:none}}
