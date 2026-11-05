@@ -66,3 +66,11 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 .projects-grid .card .media-pair,
 .projects-grid .card .media-pair img{background:#fff}
 .projects-grid .card .media-pair img{object-fit:cover}
+
+/* Compact French/English selector, without changing existing portfolio layout. */
+.nav-controls{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.lang-switch{display:flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line);border-radius:9px;background:var(--soft)}
+.lang-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:35px;padding:5px 8px;border-radius:6px;font-size:.75rem;font-weight:800;line-height:1.2;text-decoration:none;color:var(--muted)}
+.lang-switch a:hover{color:var(--accent)}
+.lang-switch a[aria-current=page]{background:var(--dark);color:#fff}
+@media(max-width:800px){.nav-controls{gap:10px}.lang-switch a{padding:6px 8px}}
