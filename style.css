@@ -204,3 +204,19 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
   .software-section .mini-image-wide{grid-column:auto}
   .software-section .mini-image-wide .mini-image-stage{aspect-ratio:3}
 }
+
+
+/* YOLO fire detection — scoped addition alongside the Mini NumPy project. */
+.software-section #fire-vision{margin-top:72px;padding-top:48px;border-top:1px solid var(--line);scroll-margin-top:96px}
+.software-section #fire-vision .mini-section-head{max-width:850px;margin-bottom:26px}
+.software-section .cv-software-card{overflow:hidden}
+.software-section .cv-code-panel{background:linear-gradient(145deg,#152336,#273e50 62%,#324957)}
+.software-section .cv-code-panel .mini-code-footer{color:#ffd4b5}
+.software-section .cv-vision-label{display:inline-flex;align-self:flex-start;margin-top:28px;padding:7px 12px;border:1px solid rgba(255,172,112,.38);border-radius:6px;color:#ffd6b9;background:rgba(255,121,60,.1);font-size:.67rem;font-weight:800;letter-spacing:.11em}
+.software-section .cv-code-panel pre{white-space:pre;line-height:1.9;margin:19px 0 27px}
+.software-section .cv-highlights{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 3px}
+.software-section .cv-highlights span{display:inline-block;padding:6px 10px;border:1px solid #d6e5ec;border-radius:999px;background:#f2f7f9;font-size:.72rem;font-weight:700;color:#274e65}
+.software-section .cv-software-card .body .cv-disclaimer{margin:14px 0 0;color:#59697a;font-size:.77rem;line-height:1.7;text-align:left;hyphens:none}
+.projects-grid .card .body>.cv-project-crosslink{border-left:3px solid var(--accent);padding:7px 0 7px 12px;margin:14px 0 0;font-size:.85rem;text-align:left}
+.cv-project-crosslink a{color:var(--accent);font-weight:750}
+@media(max-width:650px){.software-section #fire-vision{margin-top:48px;padding-top:34px}.software-section .cv-code-panel pre{font-size:.72rem}}
