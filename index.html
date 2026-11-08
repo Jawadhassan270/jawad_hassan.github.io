@@ -77,6 +77,15 @@ for detection in results[0].boxes:
   </article>
 </div>
 
+<div id="wireless-link" class="ml-showcase">
+<div class="mini-section-head"><p class="kicker">MATLAB · DIGITAL COMMUNICATIONS · SIGNAL PROCESSING</p><h3>Wireless Transmitter &amp; Receiver — 4-PAM Simulation</h3><p>A MATLAB Live Script experiment modeling a digital communication chain from symbol mapping to receiver decisions, with original signal and spectral plots.</p></div>
+<article class="card software-card"><div class="mini-code-panel"><div class="mini-code-header"><strong>Wireless_transmitter_and_receiver_design.mlx</strong><span>MATLAB / Communications</span></div><pre><code>M = 4; Rs = 3.84e6;
+sps = 16; fc = 1950e6;
+rolloff = 0.22;
+tx_pulse = rcosdesign(rolloff,6,sps,'sqrt');
+received = awgn(T_R,10,'measured');
+rx_pulse = rcosdesign(rolloff,6,sps,'sqrt');</code></pre><div class="mini-code-footer">4-PAM · ROOT-RAISED-COSINE · AWGN · MATCHED FILTER · SER</div></div>
+<div class="body"><p class="tags">TRANSMITTER · CHANNEL · RECEIVER</p><h3>End-to-end digital link modeling</h3><p>I modeled 500 randomly generated 4-PAM symbols, mapped to four amplitude levels and upsampled at 16 samples per symbol. The transmitter applies square-root raised-cosine pulse shaping (roll-off 0.22), interpolates the baseband signal and modulates a 1.95 GHz cosine carrier. The receiver adds 10 dB AWGN, performs coherent downconversion, low-pass filtering and resampling, then uses a matched filter and amplitude-decision logic to estimate the transmitted symbols.</p><p>Plots in the Live Script include the constellation, mapped/upsampled/pulse-shaped waveforms, power spectral density at multiple stages, recovered samples and detection thresholds.</p><div class="cv-highlights"><span>3.84 Msymbol/s</span><span>1.95 GHz carrier</span><span>500 symbols</span><span>10 dB SNR</span></div><p class="tools">MATLAB · Communications Toolbox · Signal Processing · 4-PAM · RRC</p><p class="cv-disclaimer"><strong>Recorded experiment:</strong> 369/500 errors (SER 0.738) in the first detector and 364/500 errors (SER 0.728) in the threshold-based detector. These high rates show that symbol timing, filtering and receiver alignment still need debugging; this is a learning simulation, not a validated wireless link. The script also loads an external <code>lpf_coeff.mat</code> file that is not included in this portfolio entry.</p></div></article></div>
 <div id="cow-horse-ml" class="ml-showcase">
   <div class="mini-section-head">
     <p class="kicker">DEEP LEARNING · IMAGE CLASSIFICATION · GENERATIVE AI</p>
