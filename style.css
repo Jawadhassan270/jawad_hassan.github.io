@@ -99,3 +99,26 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 @media(max-width:800px){.software-card{grid-template-columns:1fr}.mini-code-panel{min-height:0}}
 @media(max-width:480px){.mini-code-panel{padding:20px}.mini-code-panel pre{font-size:.79rem}.software-card .body>p:not(.tags):not(.tools){text-align:left;hyphens:none}}
 @media(prefers-reduced-motion:reduce){.mini-source-link{transition:none}}
+
+
+/* Mini NumPy demonstration gallery and main API — scoped to the software section. */
+.software-section .mini-showcase{margin-top:36px;padding:clamp(20px,3vw,38px);border:1px solid var(--line);border-radius:18px;background:linear-gradient(180deg,#f7fafc 0%,#fff 100%)}
+.software-section .mini-section-head{max-width:830px;margin-bottom:22px}
+.software-section .mini-section-head h3{margin:8px 0 12px;font-size:clamp(1.55rem,2.8vw,2.4rem);line-height:1.18;letter-spacing:-.045em}
+.software-section .mini-section-head>p:not(.kicker){color:var(--muted);line-height:1.75;margin:0}
+.software-section .mini-gallery-frame{display:block;border:1px solid var(--line);background:#fff;overflow:hidden;border-radius:14px;box-shadow:0 10px 32px rgba(10,35,54,.07);cursor:zoom-in;transition:box-shadow .2s,transform .2s}
+.software-section .mini-gallery-frame:hover{box-shadow:0 14px 42px rgba(10,35,54,.14);transform:translateY(-2px)}
+.software-section .mini-gallery-frame img{display:block;width:100%;height:auto;object-fit:contain}
+.software-section .mini-gallery-note{margin:13px 0 0;font-size:.8rem;color:var(--muted)}
+.software-section .mini-functions-section{padding-top:60px}
+.software-section .mini-functions-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.software-section .mini-function-card{border:1px solid var(--line);border-radius:14px;padding:clamp(18px,2vw,26px);background:#fff;box-shadow:0 4px 18px rgba(12,40,59,.035);min-width:0}
+.software-section .mini-function-number{display:block;font-size:.68rem;letter-spacing:.12em;color:var(--accent);font-weight:800}
+.software-section .mini-function-card h4{margin:11px 0 10px;font-size:1.14rem;line-height:1.3;letter-spacing:-.02em}
+.software-section .mini-function-card>p:not(.mini-function-code){color:var(--muted);font-size:.88rem;line-height:1.65}
+.software-section .mini-function-code{display:flex;flex-wrap:wrap;gap:6px;margin:17px 0 0;align-items:flex-start}
+.software-section .mini-function-code code{background:#eef5f7;color:#175266;padding:4px 7px;border-radius:6px;border:1px solid #dce9ee;font-size:.68rem;overflow-wrap:anywhere}
+.software-section .mini-technical-note{font-size:.82rem;color:var(--muted);margin:24px 0 0;line-height:1.7}
+@media(max-width:1000px){.software-section .mini-functions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:610px){.software-section .mini-functions-grid{grid-template-columns:1fr}.software-section .mini-showcase{padding:15px}.software-section .mini-functions-section{padding-top:42px}}
+@media(prefers-reduced-motion:reduce){.software-section .mini-gallery-frame{transition:none}.software-section .mini-gallery-frame:hover{transform:none}}
