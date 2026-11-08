@@ -77,6 +77,15 @@ for detection in results[0].boxes:
   </article>
 </div>
 
+<div id="wireless-link" class="ml-showcase">
+<div class="mini-section-head"><p class="kicker">MATLAB · COMMUNICATIONS NUMÉRIQUES · TRAITEMENT DU SIGNAL</p><h3>Émetteur et récepteur sans fil — Simulation 4-PAM</h3><p>Étude MATLAB Live Script d’une chaîne de communication numérique, du mappage des symboles à la décision du récepteur, avec des graphiques temporels et spectraux.</p></div>
+<article class="card software-card"><div class="mini-code-panel"><div class="mini-code-header"><strong>Wireless_transmitter_and_receiver_design.mlx</strong><span>MATLAB / Communications</span></div><pre><code>M = 4; Rs = 3.84e6;
+sps = 16; fc = 1950e6;
+rolloff = 0.22;
+tx_pulse = rcosdesign(rolloff,6,sps,'sqrt');
+received = awgn(T_R,10,'measured');
+rx_pulse = rcosdesign(rolloff,6,sps,'sqrt');</code></pre><div class="mini-code-footer">4-PAM · COSINUS SURÉLEVÉ · AWGN · FILTRE ADAPTÉ · SER</div></div>
+<div class="body"><p class="tags">ÉMISSION · CANAL · RÉCEPTION</p><h3>Modélisation de la chaîne de transmission</h3><p>J’ai simulé 500 symboles aléatoires 4-PAM, avec quatre niveaux d’amplitude et un suréchantillonnage de 16 échantillons par symbole. L’émetteur applique un filtre de mise en forme racine de cosinus surélevé (roll-off 0,22), une interpolation et une modulation sur porteuse de 1,95 GHz. Le récepteur introduit un bruit AWGN de 10 dB de SNR, puis effectue la démodulation cohérente, le filtrage passe-bas, le rééchantillonnage, le filtrage adapté et la détection des symboles.</p><p>Le Live Script présente les constellations, les signaux aux différentes étapes, leurs densités spectrales de puissance et les seuils de décision.</p><div class="cv-highlights"><span>3,84 Msymboles/s</span><span>Porteuse 1,95 GHz</span><span>500 symboles</span><span>SNR 10 dB</span></div><p class="tools">MATLAB · Communications Toolbox · Traitement du signal · 4-PAM · RRC</p><p class="cv-disclaimer"><strong>Résultats enregistrés :</strong> 369 erreurs sur 500 (SER 0,738) avec le premier détecteur, puis 364 erreurs (SER 0,728) avec les seuils. Ces taux élevés indiquent des problèmes à investiguer concernant la synchronisation, le filtrage et l’alignement du récepteur : il s’agit d’une simulation pédagogique, pas d’une liaison validée. Le script dépend aussi du fichier externe <code>lpf_coeff.mat</code>, non fourni ici.</p></div></article></div>
 <div id="cow-horse-ml" class="ml-showcase">
   <div class="mini-section-head">
     <p class="kicker">APPRENTISSAGE PROFOND · CLASSIFICATION · IA GÉNÉRATIVE</p>
