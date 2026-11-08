@@ -220,3 +220,25 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 .projects-grid .card .body>.cv-project-crosslink{border-left:3px solid var(--accent);padding:7px 0 7px 12px;margin:14px 0 0;font-size:.85rem;text-align:left}
 .cv-project-crosslink a{color:var(--accent);font-weight:750}
 @media(max-width:650px){.software-section #fire-vision{margin-top:48px;padding-top:34px}.software-section .cv-code-panel pre{font-size:.72rem}}
+
+
+/* CNN and CycleGAN notebook — third software project, independent of UAV cards. */
+.software-section #cow-horse-ml{margin-top:74px;padding-top:48px;border-top:1px solid var(--line);scroll-margin-top:102px}
+.software-section #cow-horse-ml>.mini-section-head{max-width:870px;margin-bottom:27px}
+.software-section .ml-software-card{overflow:hidden}
+.software-section .ml-code-panel{background:linear-gradient(148deg,#121f32 0%,#1d3c58 62%,#27445d 100%)}
+.software-section .ml-code-panel .mini-code-footer{color:#a7d5f4}
+.software-section .ml-code-pill{display:inline-flex;align-self:flex-start;margin-top:28px;padding:7px 12px;border:1px solid #699cba;border-radius:7px;background:rgba(61,138,176,.14);color:#d1ecfd;font-size:.66rem;font-weight:800;letter-spacing:.11em}
+.software-section .ml-code-panel pre{margin:20px 0 27px;white-space:pre;line-height:1.9}
+.software-section .ml-fact-row{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 2px}
+.software-section .ml-fact-row span{border-radius:9px;padding:10px 12px;background:#eef5f8;border:1px solid #dce9f0;color:#335a70;font-size:.77rem}
+.software-section .ml-fact-row strong{font-weight:800;color:#132f40;font-size:1.05rem;margin-right:4px}
+.software-section .ml-software-card .body .ml-caveat{text-align:left;hyphens:none;margin:15px 0 0;font-size:.79rem;color:#5a6979;line-height:1.7}
+.software-section .ml-gallery{margin-top:34px}
+.software-section .ml-gallery .mini-images-grid{gap:18px}
+.software-section .ml-gallery .mini-image-stage{aspect-ratio:1.32;padding:8px;background:#fff}
+.software-section .ml-gallery .ml-figure-plot .mini-image-stage{aspect-ratio:1.65}
+.software-section .ml-gallery .ml-figure-matrix .mini-image-stage{aspect-ratio:1.65}
+.software-section .ml-gallery .mini-image-figure figcaption{padding:13px 16px}
+@media(max-width:800px){.software-section #cow-horse-ml{margin-top:54px;padding-top:36px}.software-section .ml-code-panel{padding:22px}.software-section .ml-code-panel pre{font-size:.77rem}}
+@media(max-width:650px){.software-section .ml-gallery .mini-images-grid{grid-template-columns:1fr}.software-section .ml-gallery .mini-image-stage{aspect-ratio:1.4}.software-section .ml-gallery .ml-figure-plot .mini-image-stage{aspect-ratio:2}.software-section .ml-gallery .ml-figure-matrix .mini-image-stage{aspect-ratio:1.3}}
