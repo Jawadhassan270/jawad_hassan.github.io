@@ -77,3 +77,25 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 .lang-switch a:focus-visible{outline:3px solid #087e8b;outline-offset:2px}
 @media(max-width:800px){.nav-links{margin-left:0;top:76px}.nav-controls{margin-left:auto;gap:10px}.lang-switch a{min-width:40px;min-height:34px;padding:5px 8px}}
 @media(prefers-reduced-motion:reduce){.lang-switch a{transition:none}}
+
+
+/* Mini NumPy software project — self-contained styles, preserving the UAV layout. */
+.software-section{background:#fff;border-top:1px solid var(--line)}
+.software-card{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);align-items:stretch}
+.mini-code-panel{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(22px,3vw,40px);background:linear-gradient(145deg,#0c1b2b,#173b4a);color:#dff6f8}
+.mini-code-header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:1px solid #446171;padding-bottom:16px;font-size:.78rem;letter-spacing:.02em}
+.mini-code-header strong{color:#fff}.mini-code-header span{color:#a9c7d1}
+.mini-code-panel pre{margin:24px 0;overflow-x:auto;white-space:pre;font-size:clamp(.76rem,1.25vw,.95rem);line-height:1.9;tab-size:4}
+.mini-code-panel code{color:#e8fdff;font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace}
+.mini-code-footer{border-top:1px solid #446171;padding-top:14px;color:#82ced5;letter-spacing:.07em;font-size:.62rem;font-weight:800;line-height:1.65}
+.software-card .body{display:flex;flex-direction:column;justify-content:center}
+.software-card .body>p:not(.tags):not(.tools){text-align:justify;text-justify:inter-word;hyphens:auto;overflow-wrap:break-word}
+.software-card .body code{font-family:ui-monospace,SFMono-Regular,Consolas,Monaco,monospace}
+.mini-source-links{display:flex;gap:11px;flex-wrap:wrap;margin-top:16px}
+.mini-source-link{display:inline-block;padding:11px 16px;border:1px solid var(--dark);border-radius:8px;background:var(--dark);color:#fff;font-size:.81rem;font-weight:700;text-decoration:none;transition:background .2s,color .2s,border-color .2s}
+.mini-source-link:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.mini-source-secondary{background:#fff;border-color:#bbcbd5;color:var(--ink)}
+.mini-source-secondary:hover{color:#fff}
+@media(max-width:800px){.software-card{grid-template-columns:1fr}.mini-code-panel{min-height:0}}
+@media(max-width:480px){.mini-code-panel{padding:20px}.mini-code-panel pre{font-size:.79rem}.software-card .body>p:not(.tags):not(.tools){text-align:left;hyphens:none}}
+@media(prefers-reduced-motion:reduce){.mini-source-link{transition:none}}
