@@ -122,3 +122,85 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 @media(max-width:1000px){.software-section .mini-functions-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:610px){.software-section .mini-functions-grid{grid-template-columns:1fr}.software-section .mini-showcase{padding:15px}.software-section .mini-functions-section{padding-top:42px}}
 @media(prefers-reduced-motion:reduce){.software-section .mini-gallery-frame{transition:none}.software-section .mini-gallery-frame:hover{transform:none}}
+
+
+/* Mini NumPy: original-resolution image comparisons from the uploaded tests. */
+.software-section .mini-images-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+}
+.software-section .mini-image-figure{
+  min-width:0;
+  margin:0;
+  overflow:hidden;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 8px 26px rgba(10,35,54,.06);
+}
+.software-section .mini-image-stage{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px;
+  aspect-ratio:1.55;
+  overflow:hidden;
+  background:#f4f7fa;
+}
+.software-section .mini-demo-image{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  cursor:zoom-in;
+}
+.software-section .mini-image-figure figcaption{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px 18px;
+  padding:14px 17px;
+  background:#fff;
+}
+.software-section .mini-image-figure figcaption div{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  min-width:0;
+}
+.software-section .mini-image-figure figcaption strong{
+  font-size:.95rem;
+  font-weight:750;
+  color:var(--ink);
+}
+.software-section .mini-image-figure figcaption span{
+  font-size:.78rem;
+  line-height:1.5;
+  color:var(--muted);
+}
+.software-section .mini-image-open{
+  flex-shrink:0;
+  font-size:.78rem;
+  font-weight:750;
+  text-decoration:none;
+  color:var(--accent);
+}
+.software-section .mini-image-open:hover{text-decoration:underline}
+.software-section .mini-image-open:focus-visible{
+  outline:3px solid var(--accent);
+  outline-offset:4px;
+  border-radius:3px;
+}
+.software-section .mini-image-wide{grid-column:1/-1}
+.software-section .mini-image-wide .mini-image-stage{
+  aspect-ratio:4.2;
+  padding:10px;
+}
+.software-section .mini-gallery-note{margin-top:15px}
+@media(max-width:650px){
+  .software-section .mini-images-grid{grid-template-columns:1fr;gap:16px}
+  .software-section .mini-image-wide{grid-column:auto}
+  .software-section .mini-image-wide .mini-image-stage{aspect-ratio:3}
+}
