@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="fr"><head>
-<meta name="robots" content="index, follow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Jawad Hassan — portfolio de conception mécanique, drones, robotique aérienne et simulation ROS 2 / PX4."><title>Jawad Hassan | Drones et robotique aérienne</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="alternate" hreflang="en" href="index.html"><link rel="alternate" hreflang="fr" href="fr.html"><link rel="stylesheet" href="style.css?v=firecv-1"></head><body>
+<meta name="robots" content="index, follow"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Jawad Hassan — portfolio de conception mécanique, drones, robotique aérienne et simulation ROS 2 / PX4."><title>Jawad Hassan | Drones et robotique aérienne</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="alternate" hreflang="en" href="index.html"><link rel="alternate" hreflang="fr" href="fr.html"><link rel="stylesheet" href="style.css?v=cyclegan-1"></head><body>
 <header class="nav-wrap"><nav class="nav container"><a class="brand" href="#home">JH<span>.</span></a><div class="nav-links"><a href="#projects">Projets de drones</a><a href="#software">Logiciel</a><a href="#about">À propos</a><a href="#technical">Domaines techniques</a></div><div class="nav-controls"><div class="lang-switch" role="group" aria-label="Site language"><a href="index.html" lang="en">EN</a><a href="fr.html" lang="fr" aria-current="page">FR</a></div><button class="menu-btn" aria-label="Ouvrir la navigation" aria-expanded="false">☰</button></div></nav></header>
 <main><section id="home" class="hero container"><div><p class="eyebrow">CONCEPTION DE DRONES · MÉCANIQUE DU VOL · ROBOTIQUE AÉRIENNE</p><h1>Jawad Hassan</h1><h2>Portfolio — drones et robotique aérienne</h2><p class="lead">Je conçois et développe des systèmes aériens sans pilote, du dimensionnement aérodynamique et de la conception mécanique à la modélisation, la simulation, la commande et l’intégration robotique.</p><a class="btn" href="#projects">Découvrir les projets ↓</a></div><div class="hero-mark">UAV<span>CONCEVOIR · MODÉLISER · RÉALISER</span></div></section>
 <section id="projects" class="section"><div class="container"><p class="kicker">PROJETS DE DRONES</p><h2>Cinq plateformes aériennes, différents défis d’ingénierie.</h2><div class="projects-grid">
@@ -75,6 +75,52 @@ for detection in results[0].boxes:
       <p class="cv-disclaimer">Prototype uniquement : les poids du modèle sont nécessaires mais ne sont pas fournis. La profondeur affichée n’est pas une distance étalonnée et le suivi multi-objets persistant n’a pas été validé.</p>
     </div>
   </article>
+</div>
+
+<div id="cow-horse-ml" class="ml-showcase">
+  <div class="mini-section-head">
+    <p class="kicker">APPRENTISSAGE PROFOND · CLASSIFICATION · IA GÉNÉRATIVE</p>
+    <h3>Vaches et chevaux — CNN et CycleGAN</h3>
+    <p>Un notebook expérimental de vision par ordinateur combinant la classification binaire d’images et la traduction d’images non appariées entre les domaines vache et cheval. Il présente les courbes d’apprentissage, la matrice de confusion et les images générées.</p>
+  </div>
+  <article class="card software-card ml-software-card">
+    <div class="mini-code-panel ml-code-panel">
+      <div class="mini-code-header"><strong>cows_horses_complete.ipynb</strong><span>PyTorch / CNN · CycleGAN</span></div>
+      <div class="ml-code-pill">TRADUCTION D’IMAGES NON APPARIÉES</div>
+      <pre><code># Vache → Cheval → Vache
+fake_horses = G(sample_cows)
+rec_cows = F(fake_horses)
+
+# Cheval → Vache → Cheval
+fake_cows = F(sample_horses)
+rec_horses = G(fake_cows)</code></pre>
+      <div class="mini-code-footer">CNN &nbsp;·&nbsp; GÉNÉRATEURS RESNET &nbsp;·&nbsp; PATCHGAN &nbsp;·&nbsp; COHÉRENCE CYCLIQUE</div>
+    </div>
+    <div class="body">
+      <p class="tags">PYTORCH · VISION PAR ORDINATEUR · MODÈLES GÉNÉRATIFS</p>
+      <h3>Classification, traduction et reconstruction</h3>
+      <p>J’ai implémenté un réseau de neurones convolutif pour distinguer les vaches et les chevaux, avec augmentation des données, courbes d’entraînement et matrice de confusion. J’ai aussi étudié CycleGAN, avec deux générateurs et deux discriminateurs, pour traduire des images non appariées dans les deux sens puis reconstruire les images par cohérence cyclique.</p>
+      <p>Les expériences comprennent des blocs ResNet, des discriminateurs PatchGAN, des pertes adversariales, cycliques et d’identité, ainsi que des comparaisons entre images réelles, traduites et reconstruites.</p>
+      <div class="ml-fact-row"><span><strong>164</strong> images d’entraînement initiales</span><span><strong>82</strong> images de test</span><span><strong>160</strong> époques CycleGAN</span></div>
+      <div class="mini-source-links"><a class="mini-source-link" href="https://github.com/Jawadhassan270/jawad_hassan.github.io/blob/main/cow-horse-cyclegan/cows_horses_complete.ipynb" target="_blank" rel="noopener noreferrer">Voir le notebook Jupyter ↗</a><a class="mini-source-link mini-source-secondary" href="https://github.com/Jawadhassan270/jawad_hassan.github.io/tree/main/cow-horse-cyclegan" target="_blank" rel="noopener noreferrer">Fichiers du projet ↗</a></div>
+      <p class="tools">Python · PyTorch · torchvision · CNN · CycleGAN · Matplotlib · scikit-learn</p>
+      <p class="ml-caveat">Résultat expérimental : le notebook indique une exactitude finale de 50 % sur le jeu de test pour les deux essais CNN documentés. Le projet illustre l’implémentation et l’expérimentation, pas des performances de classification validées. Les jeux de données et modèles entraînés ne sont pas inclus.</p>
+    </div>
+  </article>
+  <div class="mini-showcase ml-gallery">
+    <div class="mini-section-head">
+      <p class="kicker">RÉSULTATS ORIGINAUX DU NOTEBOOK</p>
+      <h3>Traduction d’images dans les deux sens</h3>
+      <p>Images réelles, résultats traduits et reconstructions cycliques tirés du notebook fourni. Cliquez sur une image pour l’agrandir.</p>
+    </div>
+    <div class="mini-images-grid" role="list" aria-label="Résultats originaux de CycleGAN">
+      <figure class="mini-image-figure ml-figure" role="listitem"><div class="mini-image-stage"><img class="project-image mini-demo-image" tabindex="0" src="cow-horse-cyclegan/images/cow-to-horse.svg" width="1331" height="985" loading="lazy" decoding="async" alt="Vaches réelles, chevaux générés puis vaches reconstruites"></div><figcaption><div><strong>Vache → Cheval → Vache</strong><span>Image réelle / traduction / reconstruction</span></div><a class="mini-image-open" href="cow-horse-cyclegan/images/cow-to-horse.svg" target="_blank" rel="noopener noreferrer">Voir l’image ↗</a></figcaption></figure>
+      <figure class="mini-image-figure ml-figure" role="listitem"><div class="mini-image-stage"><img class="project-image mini-demo-image" tabindex="0" src="cow-horse-cyclegan/images/horse-to-cow.svg" width="1331" height="985" loading="lazy" decoding="async" alt="Chevaux réels, vaches générées puis chevaux reconstruits"></div><figcaption><div><strong>Cheval → Vache → Cheval</strong><span>Image réelle / traduction / reconstruction</span></div><a class="mini-image-open" href="cow-horse-cyclegan/images/horse-to-cow.svg" target="_blank" rel="noopener noreferrer">Voir l’image ↗</a></figcaption></figure>
+      <figure class="mini-image-figure ml-figure ml-figure-plot" role="listitem"><div class="mini-image-stage"><img class="project-image mini-demo-image" tabindex="0" src="cow-horse-cyclegan/images/cnn-training.svg" width="1189" height="390" loading="lazy" decoding="async" alt="Courbes de perte et de précision du CNN initial"></div><figcaption><div><strong>Courbes d’apprentissage CNN</strong><span>Perte et précision en entraînement et en test</span></div><a class="mini-image-open" href="cow-horse-cyclegan/images/cnn-training.svg" target="_blank" rel="noopener noreferrer">Voir l’image ↗</a></figcaption></figure>
+      <figure class="mini-image-figure ml-figure ml-figure-matrix" role="listitem"><div class="mini-image-stage"><img class="project-image mini-demo-image" tabindex="0" src="cow-horse-cyclegan/images/confusion-matrix.svg" width="393" height="390" loading="lazy" decoding="async" alt="Matrice de confusion du CNN initial : vaches et chevaux"></div><figcaption><div><strong>Matrice de confusion</strong><span>Résultats de classification sur le test</span></div><a class="mini-image-open" href="cow-horse-cyclegan/images/confusion-matrix.svg" target="_blank" rel="noopener noreferrer">Voir l’image ↗</a></figcaption></figure>
+    </div>
+    <p class="mini-gallery-note">Les images proviennent directement des sorties exécutées du notebook. La version publique sur GitHub contient le code source sans sorties intégrées ; ces quatre figures originales sont fournies séparément.</p>
+  </div>
 </div>
 </div></section>
 <section id="about" class="section alt"><div class="container split"><div><p class="kicker">À PROPOS</p><h2>L’ingénierie mécanique au service des systèmes aériens intelligents.</h2></div><div><p>Ingénieur en mécanique de formation, je poursuis actuellement un master axé sur la mécatronique, la vision par ordinateur et l’intelligence artificielle.</p><p>Mes travaux portent sur la conception de drones, la mécanique du vol, la mécatronique, la robotique, la modélisation et la simulation, avec un intérêt particulier pour les aéronefs à voilure fixe, les systèmes VTOL et la manipulation aérienne.</p></div></div></section>
