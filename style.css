@@ -285,3 +285,12 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
   max-width:100%;
   object-fit:contain;
 }
+
+/* Align compact software cards: reset legacy showcase offsets on former sections. */
+.software-section .software-project-grid > .software-project-card#fire-vision,
+.software-section .software-project-grid > .software-project-card#cow-horse-ml {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  align-self: stretch;
+}
