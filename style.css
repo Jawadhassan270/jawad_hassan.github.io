@@ -294,3 +294,16 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
   border: 1px solid var(--line);
   align-self: stretch;
 }
+
+/* Featured UAV design software — development preview */
+.software-section .uav-calculator-feature{display:grid;grid-template-columns:minmax(240px,.85fr) minmax(0,1.65fr);margin-bottom:24px;overflow:hidden}
+.software-section .uav-calculator-graphic{min-height:230px;background:linear-gradient(145deg,#10253b,#205c6a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:23px;padding:28px}
+.software-section .uav-calculator-mark{color:#a9f4e9;border:2px solid #5bbaac;border-radius:12px;font-weight:850;letter-spacing:.14em;font-size:3rem;padding:12px 24px;line-height:1.1;box-shadow:0 0 0 7px #ffffff0b}
+.software-section .uav-calculator-graphic-lines{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.software-section .uav-calculator-graphic-lines span{font-size:.61rem;font-weight:800;letter-spacing:.07em;color:#d4ecf2;padding:4px 7px;border:1px solid #689ca8;border-radius:4px}
+.software-section .uav-calculator-info{padding:25px 28px}
+.software-section .uav-calculator-info h3{font-size:1.4rem;line-height:1.3;margin:8px 0 12px}
+.software-section .uav-calculator-info p:not(.tags):not(.tools){font-size:.91rem;line-height:1.65;color:var(--muted)}
+.software-section .uav-beta-tag{display:inline-block;vertical-align:middle;background:#fff3d8;color:#805116;border:1px solid #e9d29e;border-radius:999px;font-size:.58rem;font-weight:800;letter-spacing:.04em;padding:4px 9px;margin-left:5px}
+.software-section .uav-calculator-info .software-card-links a{display:inline-block;padding:8px 11px;border:1px solid #bdd9dc;border-radius:7px}
+@media(max-width:750px){.software-section .uav-calculator-feature{grid-template-columns:1fr}.software-section .uav-calculator-graphic{min-height:160px}.software-section .uav-calculator-info{padding:20px}}
