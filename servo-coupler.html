@@ -10,6 +10,7 @@ main{max-width:1100px;margin:48px auto;padding:0 22px}h1{font-size:clamp(2rem,4v
 .layout{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;margin-top:32px}.panel{background:white;border:1px solid #e1e7ed;border-radius:18px;padding:26px;box-shadow:0 8px 30px #17344809}.preview{background:linear-gradient(150deg,#eaf0f7,#f9fbfe);border-radius:15px;min-height:300px;display:grid;place-items:center;margin-bottom:20px;overflow:hidden}.preview svg{max-width:100%;height:auto}
 .muted{color:#607284;font-size:.91rem;line-height:1.6}.field{margin:0 0 19px}.field label{display:flex;justify-content:space-between;margin:0 0 7px;font-size:.88rem;font-weight:700}.field input,.field select{width:100%;padding:11px 12px;border:1px solid #cbd7df;border-radius:8px;background:white;color:#18293a;font:inherit}input[type=range]{padding:0;accent-color:#346d86}.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.btns{display:flex;flex-wrap:wrap;gap:10px}.button{border:0;border-radius:9px;background:#1c657d;color:white;display:inline-block;padding:13px 16px;font:700 .88rem Inter,sans-serif;text-decoration:none;cursor:pointer}.button.alt{background:#e7f1f4;color:#18445b}.button:hover{filter:brightness(.93)}.downloads{margin-top:25px;padding-top:22px;border-top:1px solid #e1e7ed}.links{display:flex;flex-wrap:wrap;gap:11px}.links a{padding:10px 12px;background:#f1f6f9;border-radius:8px;font-weight:650;font-size:.83rem;text-decoration:none}.notice{font-size:.81rem;color:#67798a;margin-top:15px;line-height:1.65}.error{color:#a52d32;font-weight:700;min-height:1.2em}.model-caption{text-align:center;font-size:.78rem;color:#627588;margin:-4px 0 10px}footer{padding:40px 22px;text-align:center;color:#718091;font-size:.85rem}
 @media(max-width:780px){.layout{grid-template-columns:1fr}main{margin:28px auto}.panel{padding:20px}}
+.servo-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:14px;background:#f3f6f9;min-height:0}.servo-photo-grid a{display:flex;flex-direction:column;gap:8px;text-align:center;color:#385267;font-weight:700;font-size:.82rem;text-decoration:none;min-width:0}.servo-photo-grid img{width:100%;height:240px;object-fit:contain;background:white;border:1px solid #e3eaf0;border-radius:11px;transition:transform .2s}.servo-photo-grid img:hover{transform:scale(1.02)}@media(max-width:510px){.servo-photo-grid{grid-template-columns:1fr}.servo-photo-grid img{height:210px}}
 </style></head>
 <body><header><a href="index.html">JH<span style="color:#63bad1">.</span> Portfolio</a><a href="fr.html">FR / EN</a></header>
 <main>
@@ -18,18 +19,11 @@ main{max-width:1100px;margin:48px auto;padding:0 22px}h1{font-size:clamp(2rem,4v
 <p class="intro">Configure a cylindrical servo-to-shaft adapter with a female servo spline, an axial servo attachment screw, a radial shaft-locking screw, and either a round or D-shaped shaft socket. Download the parametric source or use a ready-to-print STL preset.</p>
 <div class="layout">
 <section class="panel">
-<div class="preview">
-<svg viewBox="0 0 430 325" role="img" aria-label="Schematic of a cylindrical coupler with top shaft socket and radial locking hole">
-<defs><linearGradient id="metal" x1="0" x2="1"><stop stop-color="#734e98"/><stop offset=".55" stop-color="#aa81d2"/><stop offset="1" stop-color="#664283"/></linearGradient></defs>
-<path d="M126 72 L285 72 L317 100 L317 252 Q300 278 217 282 Q136 277 108 252 L108 101Z" fill="url(#metal)" stroke="#654681" stroke-width="2"/>
-<ellipse cx="213" cy="98" rx="105" ry="42" fill="#bb9ada" stroke="#654681" stroke-width="2"/>
-<ellipse cx="213" cy="96" rx="52" ry="21" fill="#3c2b50" stroke="#d4b9e8" stroke-width="3"/>
-<path id="flat-illustration" d="M245 80 L246 111" fill="none" stroke="#e0caee" stroke-width="5"/>
-<ellipse cx="311" cy="185" rx="13" ry="19" fill="#34253e" stroke="#dab7ed" stroke-width="3"/>
-<path d="M112 254 Q216 321 317 253" stroke="#593e72" stroke-width="2" fill="none"/>
-<g fill="#43576b" font-size="13" font-family="Inter, sans-serif"><text x="22" y="54">Shaft socket</text><path d="M113 52 L169 86" fill="none" stroke="#617486"/><text x="321" y="172">Locking</text><text x="321" y="188">screw</text><text x="131" y="310">Servo spline underneath</text></g>
-</svg></div>
-<p class="model-caption">Engineering schematic · not a dimensionally exact CAD preview</p>
+<div class="preview servo-photo-grid">
+<a href="SERVO%20TOP.png" target="_blank" rel="noopener noreferrer"><img src="SERVO%20TOP.png" alt="Actual CAD top view of servo shaft coupler" loading="eager"><span>Top view</span></a>
+<a href="SERVO_FRONT.png" target="_blank" rel="noopener noreferrer"><img src="SERVO_FRONT.png" alt="Actual CAD front view of servo shaft coupler" loading="eager"><span>Front view</span></a>
+</div>
+<p class="model-caption">Original CAD images · click either view to enlarge</p>
 <h2>Download standard STL</h2>
 <div class="links">
 <a href="servo-shaft-coupler/STL/SG90_Round_6mm.stl" download>Round · 6 mm STL</a>
@@ -81,7 +75,7 @@ function validate(){
  if(p.body<=5.8){error.textContent='Increase coupler body diameter.';return false}
  return true;
 }
-document.getElementById('shape').addEventListener('change',()=>document.getElementById('flat-illustration').style.display=document.getElementById('shape').value==='Round'?'none':'');
+
 document.getElementById('config').addEventListener('submit',async e=>{
  e.preventDefault();if(!validate())return;
  const overrides={
