@@ -307,3 +307,51 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
 .software-section .uav-beta-tag{display:inline-block;vertical-align:middle;background:#fff3d8;color:#805116;border:1px solid #e9d29e;border-radius:999px;font-size:.58rem;font-weight:800;letter-spacing:.04em;padding:4px 9px;margin-left:5px}
 .software-section .uav-calculator-info .software-card-links a{display:inline-block;padding:8px 11px;border:1px solid #bdd9dc;border-radius:7px}
 @media(max-width:750px){.software-section .uav-calculator-feature{grid-template-columns:1fr}.software-section .uav-calculator-graphic{min-height:160px}.software-section .uav-calculator-info{padding:20px}}
+
+/* Portfolio-matched UAV design calculator feature */
+.software-section .uav-calculator-feature{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:15px;
+  box-shadow:none;
+  grid-template-columns:minmax(220px,.83fr) minmax(0,1.65fr);
+}
+.software-section .uav-calculator-graphic{
+  background:linear-gradient(135deg,#f2f8f9,#e4f0f1);
+  border-right:1px solid var(--line);
+  min-height:230px;
+  gap:14px;
+}
+.software-section .uav-calculator-plane{
+  width:min(172px,80%);
+  height:auto;
+  color:#147b8b;
+  filter:none;
+}
+.software-section .uav-calculator-graphic-lines span{
+  color:#45636d;
+  border-color:#cbdde1;
+  background:#ffffffba;
+  border-radius:5px;
+  font-size:.63rem;
+}
+.software-section .uav-calculator-info h3{color:var(--ink);letter-spacing:-.02em}
+.software-section .uav-beta-tag{
+  color:#816026;
+  background:#fff8e9;
+  border:1px solid #e7d7b3;
+  font-size:.62rem;
+  line-height:1.5;
+  padding:4px 9px;
+}
+.software-section .uav-calculator-info .software-card-links a{
+  color:var(--accent);
+  border:1px solid #c9e0e3;
+  background:#f6fafb;
+  border-radius:7px;
+}
+.software-section .uav-calculator-info .software-card-links a:hover{background:#e9f4f5;text-decoration:none}
+@media(max-width:750px){
+  .software-section .uav-calculator-graphic{border-right:0;border-bottom:1px solid var(--line);min-height:165px}
+  .software-section .uav-calculator-plane{width:120px}
+}
