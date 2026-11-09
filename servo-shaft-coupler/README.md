@@ -7,7 +7,7 @@ Mechanical design by Jawad Hassan. A cylindrical coupler connecting a servo spli
 - `STL/`: standard ready-to-print presets generated automatically by GitHub Actions.
 
 ## Standard presets
-SG90TP, 6 mm or 5 mm output shafts, round or D-shaped, 12 mm outer diameter, 24 mm total length.
+SG90TP, 6 mm or 8 mm output shafts, round or D-shaped, 12 mm outer diameter, 24 mm total length.
 
 ## Customize
 Use the [portfolio configurator](../../servo-coupler.html) to configure dimensions and download a customized `.scad` model. Open in free OpenSCAD, press F6, then File → Export → STL. **Custom STL rendering does not run in GitHub Pages; the online configurator exports a parametrized OpenSCAD source.**
