@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parametric Servo Shaft Coupler | Jawad Hassan</title>
+<meta name="description" content="Configure an open-source SG90 servo shaft coupler, download OpenSCAD source and ready-to-print STL presets.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;font-family:Inter,system-ui,sans-serif;color:#18293a;background:#f5f8fb}
+*{box-sizing:border-box}body{margin:0}a{color:#236a84}header{background:#102938;color:white;padding:18px max(22px,calc((100vw - 1100px)/2));display:flex;justify-content:space-between;align-items:center;gap:20px}header a{color:#fff;text-decoration:none;font-weight:700}
+main{max-width:1100px;margin:48px auto;padding:0 22px}h1{font-size:clamp(2rem,4vw,3.2rem);margin:8px 0}h2{margin-top:0;font-size:1.4rem}.eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#397e91;font-size:.78rem;font-weight:800}.intro{color:#556779;max-width:780px;line-height:1.75}
+.layout{display:grid;grid-template-columns:1.05fr 1fr;gap:26px;margin-top:32px}.panel{background:white;border:1px solid #e1e7ed;border-radius:18px;padding:26px;box-shadow:0 8px 30px #17344809}.preview{background:linear-gradient(150deg,#eaf0f7,#f9fbfe);border-radius:15px;min-height:300px;display:grid;place-items:center;margin-bottom:20px;overflow:hidden}.preview svg{max-width:100%;height:auto}
+.muted{color:#607284;font-size:.91rem;line-height:1.6}.field{margin:0 0 19px}.field label{display:flex;justify-content:space-between;margin:0 0 7px;font-size:.88rem;font-weight:700}.field input,.field select{width:100%;padding:11px 12px;border:1px solid #cbd7df;border-radius:8px;background:white;color:#18293a;font:inherit}input[type=range]{padding:0;accent-color:#346d86}.two{display:grid;grid-template-columns:1fr 1fr;gap:15px}.btns{display:flex;flex-wrap:wrap;gap:10px}.button{border:0;border-radius:9px;background:#1c657d;color:white;display:inline-block;padding:13px 16px;font:700 .88rem Inter,sans-serif;text-decoration:none;cursor:pointer}.button.alt{background:#e7f1f4;color:#18445b}.button:hover{filter:brightness(.93)}.downloads{margin-top:25px;padding-top:22px;border-top:1px solid #e1e7ed}.links{display:flex;flex-wrap:wrap;gap:11px}.links a{padding:10px 12px;background:#f1f6f9;border-radius:8px;font-weight:650;font-size:.83rem;text-decoration:none}.notice{font-size:.81rem;color:#67798a;margin-top:15px;line-height:1.65}.error{color:#a52d32;font-weight:700;min-height:1.2em}.model-caption{text-align:center;font-size:.78rem;color:#627588;margin:-4px 0 10px}footer{padding:40px 22px;text-align:center;color:#718091;font-size:.85rem}
+@media(max-width:780px){.layout{grid-template-columns:1fr}main{margin:28px auto}.panel{padding:20px}}
+</style></head>
+<body><header><a href="index.html">JH<span style="color:#63bad1">.</span> Portfolio</a><a href="fr.html">FR / EN</a></header>
+<main>
+<p class="eyebrow">Open-source mechanical design · OpenSCAD</p>
+<h1>Parametric Servo Shaft Coupler</h1>
+<p class="intro">Configure a cylindrical servo-to-shaft adapter with a female servo spline, an axial servo attachment screw, a radial shaft-locking screw, and either a round or D-shaped shaft socket. Download the parametric source or use a ready-to-print STL preset.</p>
+<div class="layout">
+<section class="panel">
+<div class="preview">
+<svg viewBox="0 0 430 325" role="img" aria-label="Schematic of a cylindrical coupler with top shaft socket and radial locking hole">
+<defs><linearGradient id="metal" x1="0" x2="1"><stop stop-color="#734e98"/><stop offset=".55" stop-color="#aa81d2"/><stop offset="1" stop-color="#664283"/></linearGradient></defs>
+<path d="M126 72 L285 72 L317 100 L317 252 Q300 278 217 282 Q136 277 108 252 L108 101Z" fill="url(#metal)" stroke="#654681" stroke-width="2"/>
+<ellipse cx="213" cy="98" rx="105" ry="42" fill="#bb9ada" stroke="#654681" stroke-width="2"/>
+<ellipse cx="213" cy="96" rx="52" ry="21" fill="#3c2b50" stroke="#d4b9e8" stroke-width="3"/>
+<path id="flat-illustration" d="M245 80 L246 111" fill="none" stroke="#e0caee" stroke-width="5"/>
+<ellipse cx="311" cy="185" rx="13" ry="19" fill="#34253e" stroke="#dab7ed" stroke-width="3"/>
+<path d="M112 254 Q216 321 317 253" stroke="#593e72" stroke-width="2" fill="none"/>
+<g fill="#43576b" font-size="13" font-family="Inter, sans-serif"><text x="22" y="54">Shaft socket</text><path d="M113 52 L169 86" fill="none" stroke="#617486"/><text x="321" y="172">Locking</text><text x="321" y="188">screw</text><text x="131" y="310">Servo spline underneath</text></g>
+</svg></div>
+<p class="model-caption">Engineering schematic · not a dimensionally exact CAD preview</p>
+<h2>Download standard STL</h2>
+<div class="links">
+<a href="servo-shaft-coupler/STL/SG90_Round_6mm.stl" download>Round · 6 mm STL</a>
+<a href="servo-shaft-coupler/STL/SG90_D_Shaft_6mm.stl" download>D-flat · 6 mm STL</a>
+<a href="servo-shaft-coupler/STL/SG90_Round_5mm.stl" download>Round · 5 mm STL</a>
+<a href="servo-shaft-coupler/STL/SG90_D_Shaft_5mm.stl" download>D-flat · 5 mm STL</a>
+</div>
+<p class="notice">Standard STL files are built by GitHub Actions. If a preset link returns 404, the initial render workflow has not finished successfully.</p>
+<div class="downloads">
+<div class="btns"><a class="button alt" href="servo-shaft-coupler/servo_shaft_coupler.scad" download>Download original OpenSCAD</a><a class="button alt" href="https://github.com/Jawadhassan270/jawad_hassan.github.io/tree/main/servo-shaft-coupler" target="_blank" rel="noopener noreferrer">GitHub source ↗</a></div>
+</div>
+</section>
+<section class="panel">
+<h2>Configure your coupler</h2>
+<p class="muted">Change the dimensions, then download your customized OpenSCAD file. Open it in OpenSCAD, press F6, and export as STL.</p>
+<form id="config">
+<div class="field"><label for="servo">Servo spline</label><select id="servo"><option>SG90TP</option><option>SG90</option><option>3F</option><option>2F</option><option>1F</option><option>A1</option></select></div>
+<div class="field"><label for="shape">Output shaft profile</label><select id="shape"><option value="D-Shaped">D-shaped (flat side)</option><option value="Round">Round</option></select></div>
+<div class="two">
+<div class="field"><label for="diameter">Shaft Ø (mm)</label><input id="diameter" type="number" min="5.8" max="12" step="0.1" value="6"></div>
+<div class="field"><label for="clearance">Shaft clearance (mm)</label><input id="clearance" type="number" min="0" max="0.6" step="0.05" value="0.2"></div>
+<div class="field"><label for="body">Body Ø (mm)</label><input id="body" type="number" min="10" max="30" step="0.5" value="12"></div>
+<div class="field"><label for="length">Overall length (mm)</label><input id="length" type="number" min="18" max="60" step="1" value="24"></div>
+<div class="field"><label for="insert">Shaft insertion (mm)</label><input id="insert" type="number" min="5" max="30" step="1" value="10"></div>
+<div class="field"><label for="flat">D-flat depth (mm)</label><input id="flat" type="number" min="0" max="3" step="0.1" value="0.5"></div>
+<div class="field"><label for="side">Radial screw Ø (mm)</label><input id="side" type="number" min="1.5" max="6" step="0.1" value="2.5"></div>
+<div class="field"><label for="offset">Screw from top (mm)</label><input id="offset" type="number" min="1" max="25" step="0.5" value="5"></div>
+</div>
+<div class="field"><label for="angle">Side screw angle (degrees)</label><input id="angle" type="number" min="0" max="360" step="5" value="0"></div>
+<div class="field"><label><span>Enable radial locking hole</span><input id="enable" type="checkbox" checked style="width:auto"></label></div>
+<p id="validation" class="error" role="alert"></p>
+<div class="btns"><button class="button" type="submit">Download customized .SCAD</button><a class="button alt" href="https://openscad.org/" target="_blank" rel="noopener noreferrer">Get OpenSCAD ↗</a></div>
+</form>
+<p class="notice">GitHub Pages cannot run the desktop OpenSCAD engine. This configurator exports working parametric source, rather than pretending to provide a browser-generated custom STL. Verify spline tolerances, screw sizes, and structural strength before use.</p>
+</section></div>
+</main><footer>Jawad Hassan · Open-source mechanical design · 2026</footer>
+<script>
+const fields=['diameter','clearance','body','length','insert','flat','side','offset','angle'];
+function getNumber(id){return Number(document.getElementById(id).value)}
+function validate(){
+ const p=Object.fromEntries(fields.map(id=>[id,getNumber(id)]));
+ const error=document.getElementById('validation');error.textContent='';
+ if(fields.some(id=>!Number.isFinite(p[id]))){error.textContent='Enter valid numeric values.';return false}
+ if(p.diameter+p.clearance>=p.body){error.textContent='The shaft socket must be smaller than the coupler body.';return false}
+ if(p.diameter+p.clearance<5.8){error.textContent='The shaft socket must be at least 5.8 mm to access the servo screw.';return false}
+ if(p.length-p.insert<=8){error.textContent='Increase the body length or reduce shaft insertion to leave room for the servo screw.';return false}
+ if(p.flat>=p.diameter/2){error.textContent='D-flat depth is too large.';return false}
+ if(document.getElementById('enable').checked && p.offset>=p.insert){error.textContent='The radial screw must intersect the shaft socket.';return false}
+ if(p.body<=5.8){error.textContent='Increase coupler body diameter.';return false}
+ return true;
+}
+document.getElementById('shape').addEventListener('change',()=>document.getElementById('flat-illustration').style.display=document.getElementById('shape').value==='Round'?'none':'');
+document.getElementById('config').addEventListener('submit',async e=>{
+ e.preventDefault();if(!validate())return;
+ const overrides={
+   servo_preset:JSON.stringify(document.getElementById('servo').value),
+   shaft_type:JSON.stringify(document.getElementById('shape').value),
+   shaft_diameter:getNumber('diameter'),shaft_clearance:getNumber('clearance'),
+   coupler_diameter:getNumber('body'),coupler_length:getNumber('length'),
+   shaft_insert_depth:getNumber('insert'),shaft_flat_depth:getNumber('flat'),
+   side_screw_diameter:getNumber('side'),side_screw_top_offset:getNumber('offset'),
+   side_screw_angle:getNumber('angle'),enable_side_screw:document.getElementById('enable').checked
+ };
+ try{
+   const response=await fetch('servo-shaft-coupler/servo_shaft_coupler.scad');
+   if(!response.ok)throw Error('Unable to load the OpenSCAD source.');
+   let text=await response.text();
+   for(const [key,value] of Object.entries(overrides)){
+      const pattern=new RegExp('(^\\s*'+key+'\\s*=\\s*)[^;]+(;)', 'm');
+      if(!pattern.test(text))throw Error('Missing parameter: '+key);
+      text=text.replace(pattern,(_,start,end)=>start+value+end);
+   }
+   const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));
+   const a=document.createElement('a');a.href=url;a.download='servo_coupler_custom.scad';document.body.appendChild(a);a.click();a.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1000);
+ }catch(err){document.getElementById('validation').textContent=err.message}
+});
+</script></body></html>
