@@ -21,7 +21,7 @@ jobs:
       - name: Render four presets
         run: |
           mkdir -p servo-shaft-coupler/STL
-          for diameter in 5 6; do
+          for diameter in 6 8; do
             for shape in Round D-Shaped; do
               suffix=Round
               if [ "$shape" = "D-Shaped" ]; then suffix=D_Shaft; fi
