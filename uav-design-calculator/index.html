@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="dark" name="color-scheme"/><title>UAV Design Calculator | Development Preview</title><style>
+:root{--bg:#0b1220;--panel:#121d2e;--panel2:#17253a;--border:#293b51;--ink:#edf4fb;--muted:#99aabd;--teal:#55dbc8;--blue:#7fb7ff;--amber:#f4bc71;--red:#ff9191;--radius:15px}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Arial,sans-serif;line-height:1.55}button,input,select{font:inherit}button{cursor:pointer}.app{max-width:1530px;margin:auto;padding:28px 26px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:24px}.logo{width:46px;height:46px;background:linear-gradient(135deg,#3ad9c3,#2d6dba);border-radius:13px;display:grid;place-items:center;font-weight:850;color:#071421;letter-spacing:-2px}.brand{display:flex;align-items:center;gap:14px}.brand h1{font-size:1.25rem;line-height:1.1;letter-spacing:.045em;margin:0}.brand p{margin:5px 0 0;color:var(--muted);font-size:.75rem}.actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.btn{border:1px solid var(--border);color:var(--ink);padding:10px 13px;border-radius:10px;background:#19273b;font-size:.84rem}.btn:hover{border-color:var(--teal)}.btn.primary{background:var(--teal);color:#082324;font-weight:750;border-color:var(--teal)}.layout{display:grid;grid-template-columns:318px minmax(0,1fr);gap:22px;align-items:start}.sidebar{position:sticky;top:18px;background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:22px;max-height:calc(100vh - 36px);overflow:auto}.smallcap{font-size:.68rem;color:var(--teal);font-weight:850;letter-spacing:.16em;text-transform:uppercase}.sidebar h2{font-size:1.12rem;margin:8px 0 5px}.sub{font-size:.78rem;color:var(--muted);margin:0 0 20px}.fieldset{padding-top:19px;margin-top:18px;border-top:1px solid var(--border)}.fieldset h3{margin:0 0 13px;font-size:.83rem;color:#c8d7e5;letter-spacing:.015em}.field{display:grid;grid-template-columns:1fr 104px;align-items:center;gap:10px;margin:11px 0}.field label{font-size:.78rem;color:#c3d0de;line-height:1.35}.field label small{display:block;color:#8196ad;font-size:.68rem}.field input{width:100%;background:#0b1625;color:#fff;border:1px solid #354961;border-radius:8px;padding:8px 9px;text-align:right;font-size:.84rem;min-width:0}.field input:focus{outline:1px solid var(--teal);border-color:var(--teal)}.wide{grid-column:1/-1}.note{color:var(--muted);font-size:.76rem}.main{min-width:0}.hero{background:linear-gradient(118deg,#162d3b,#102136 60%,#112d39);border:1px solid #25576a;border-radius:var(--radius);padding:25px 28px;display:flex;justify-content:space-between;gap:15px}.hero h2{font-size:clamp(1.35rem,2.7vw,2rem);margin:6px 0;letter-spacing:-.035em}.hero p{color:#b9cbd9;margin:4px 0 0;max-width:720px;font-size:.85rem}.hero .mark{font-size:4rem;align-self:center;color:#59d1c8;opacity:.45;line-height:1}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tab{padding:10px 15px;border-radius:9px;background:#132034;border:1px solid var(--border);color:var(--muted);font-size:.85rem}.tab.active{background:#214c53;color:#bafff1;border-color:#397f85}.pane{display:none}.pane.active{display:block}.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:17px}.metric,.card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius)}.metric{padding:18px}.metric label{font-size:.72rem;color:#9eafc0;display:block}.metric strong{display:block;font-size:clamp(1.25rem,2.2vw,1.8rem);margin:8px 0 1px;font-weight:760;letter-spacing:-.025em}.metric small{color:#8ea4b9;font-size:.69rem}.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{padding:20px;min-width:0;margin-bottom:16px}.card h3{font-size:1rem;margin:0 0 5px}.card>p{color:var(--muted);font-size:.8rem;margin:2px 0 15px}.result{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:10px 0;border-bottom:1px solid #233448;font-size:.85rem}.result:last-child{border-bottom:0}.result span{color:#bac8d6}.result b{font-variant-numeric:tabular-nums;color:#f0f6ff;white-space:nowrap}.result.highlight b{color:var(--teal)}.pill{display:inline-flex;border:1px solid #4c6258;color:#bce5d5;background:#1b3632;padding:6px 10px;border-radius:999px;font-size:.7rem}.pill.warn{border-color:#8a6540;color:#f9d2a4;background:#382c23}.pill.danger{border-color:#994b50;color:#ffc0c5;background:#42262d}.notice{border-left:3px solid var(--amber);background:#302819;padding:14px 17px;color:#e9d4b9;font-size:.81rem;border-radius:3px 10px 10px 3px;margin-bottom:15px}.notice.success{border-left-color:var(--teal);background:#18332f;color:#b4e9dd}.chart{width:100%;height:auto;display:block}.chart text{font-family:inherit}.table-scroll{overflow:auto}.table{border-collapse:collapse;width:100%;font-size:.8rem}.table th{background:#1b2d42;font-size:.72rem;text-align:left;color:#aac2d6;letter-spacing:.02em}.table td,.table th{padding:11px 12px;border-bottom:1px solid #26394d}.table input{background:#0c1a2b;border:1px solid #35506b;color:var(--ink);padding:7px;border-radius:6px;width:88px;text-align:right}.table td.num{text-align:right;font-variant-numeric:tabular-nums}.table .right{text-align:right}.table tr:hover td{background:#15263a}.money{color:var(--teal);font-weight:800}.mini{font-size:.75rem;color:var(--muted)}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#19283b;border-radius:10px;padding:14px}.stat small{display:block;color:var(--muted)}.stat b{font-size:1.2rem}.foot{margin-top:18px;color:#879cb1;font-size:.73rem}.callouts{display:grid;gap:10px}.callout{background:#17273a;border:1px solid #324960;padding:14px;border-radius:10px}.callout strong{display:block;font-size:.84rem;margin-bottom:5px}.callout p{font-size:.78rem;color:var(--muted);margin:0}code{background:#0b1b2c;padding:1px 4px;border-radius:4px;color:#9fefdf}@media(max-width:1120px){.layout{grid-template-columns:280px 1fr}.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:800px){.app{padding:16px}.layout{display:block}.sidebar{position:static;max-height:none;margin-bottom:17px}.cols{grid-template-columns:1fr}.hero .mark{display:none}.top{align-items:start}.kpis{grid-template-columns:repeat(2,1fr)}}@media(max-width:470px){.kpis{grid-template-columns:1fr 1fr}.metric{padding:12px}.metric strong{font-size:1.25rem}.brand h1{font-size:1.02rem}.actions .btn{padding:8px;font-size:.75rem}.top{flex-direction:column}.three{grid-template-columns:1fr}.tabs{gap:5px}.tab{font-size:.76rem;padding:8px 10px}}@media print{body{background:white;color:black}.sidebar,.tabs,.actions,.foot{display:none}.layout{display:block}.pane{display:block!important;break-before:page}.card,.metric,.hero{border:1px solid #aaa;background:white;color:black;break-inside:avoid}.result b,.card h3,.metric strong{color:black}.result span,.card p,.metric label{color:#444}}
+
+/* Project-specific setup and editable BOM */
+.project-controls{display:grid;gap:8px;padding:8px 0 12px}.project-controls input,.project-controls select{width:100%;min-width:0;border:1px solid #354961;border-radius:8px;background:#0b1625;color:#edf4fb;padding:10px 12px}.project-controls label{margin-top:9px}.table input.bom-name{width:205px;text-align:left}.table .bom-remove{padding:3px 9px;color:#ffc0c5;border-color:#673f4a}.table th:last-child{width:45px}#projectName:focus,#preset:focus{outline:2px solid var(--teal)}
+
+/* mission-first additions */
+#pane-mission .card>h2{line-height:1.25} .fine{font-size:.78rem;color:#8096a9;line-height:1.6}
+.reference-table{font-size:.83rem}.reference-table td{white-space:normal}.btn.tiny{padding:5px 9px;font-size:.72rem}
+.quick-search{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}.quick-search a{border:1px solid #426a7b;border-radius:9px;padding:8px 11px;text-decoration:none;color:#60dfcb;background:#10293d;font-size:.8rem;font-weight:700}
+.quick-search a:hover{border-color:#60dfcb}.bom-search{font-size:.78rem;white-space:nowrap;color:#55d8cb;text-decoration:none}.bom-search:hover{text-decoration:underline}
+.fieldset h3{position:sticky;top:0;background:#14283a;padding:8px 0;z-index:1}
+@media(max-width:690px){.reference-table{min-width:430px}.quick-search{gap:5px}}
+
+.airfoil-select{width:100%;background:#0b1625;color:#f0f7fe;border:1px solid #354961;border-radius:8px;padding:8px 9px;font-size:.84rem}
+.airfoil-table th,.airfoil-table td{white-space:nowrap;text-align:right}.airfoil-table th:first-child,.airfoil-table td:first-child{text-align:left}
+.formula{background:#0b1a29;border:1px solid #335169;border-radius:10px;padding:13px 16px;color:#cce1f0;font-size:.87rem;margin:13px 0;line-height:1.9}
+.badge-inline{display:inline-block;background:#173d45;border:1px solid #2e6770;color:#87e5d6;padding:2px 8px;border-radius:6px;font-size:.7rem}
+
+.airfoil-status{border:1px solid #32717a;border-radius:10px;padding:12px;background:#0b2936;display:flex;flex-direction:column;gap:5px}
+.airfoil-status strong{font-size:.8rem;color:#d8ebf2}.airfoil-status span{font-size:1.5rem;font-weight:800;color:#6ce2d4}.airfoil-status small{font-size:.71rem;color:#9eb8c6}
+
+/* Airfoil setup belongs in the Wing Design pane, below the mission inputs. */
+#wingAirfoilSetup{margin-bottom:18px;scroll-margin-top:16px}
+.airfoil-setup-layout{display:grid;grid-template-columns:minmax(230px,1.05fr) minmax(230px,1fr);gap:20px;align-items:start;margin:20px 0}
+.airfoil-large-label{display:block;font-size:.86rem;color:#e1ebf4;font-weight:750;margin-bottom:8px}
+.airfoil-large-label small{font-size:.74rem;color:#97abc0;font-weight:400;margin-left:8px}
+#wingAirfoilSetup .airfoil-select{height:45px;font-size:.93rem}
+#wingAirfoilSetup .field{grid-template-columns:1fr minmax(120px,160px);margin:15px 0 0}
+#wingAirfoilSetup .airfoil-status{min-height:112px;justify-content:center}
+#wingAirfoilSetup .airfoil-status span{font-size:2rem}
+.airfoil-re-explain{padding:16px 18px;background:#0e2131;border:1px solid #2d5061;border-radius:11px;margin:4px 0 16px}
+.airfoil-re-explain>strong{font-size:.85rem;color:#9be2d8}
+.airfoil-re-explain .formula{margin:10px 0;font-size:.9rem}
+.airfoil-re-explain p{font-size:.82rem;color:#a9bfd1;margin:6px 0 0}
+@media(max-width:750px){.airfoil-setup-layout{grid-template-columns:1fr}.airfoil-large-label small{display:block;margin-left:0}}
+
+/* Compact information controls for sizing and airfoil reference tables */
+.reference-table .info-tip{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:7px;width:18px;height:18px;padding:0;border-radius:50%;border:1px solid #7291ac;background:#223c54;color:#dff8ff;font-size:12px;font-weight:800;line-height:1;cursor:help;position:relative;isolation:isolate}
+.reference-table .info-tip:hover,.reference-table .info-tip:focus-visible{border-color:#55dbc8;background:#2b5961;outline:1px solid #55dbc8}
+.reference-table .info-tip:is(:hover,:focus-visible)::after{content:attr(data-help);position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%);width:max-content;max-width:min(270px,70vw);white-space:normal;text-align:left;padding:9px 11px;border-radius:8px;box-shadow:0 6px 20px #0009;border:1px solid #4b6b7f;background:#0e2235;color:#f0f8ff;font-size:12px;line-height:1.45;font-weight:500;z-index:100;pointer-events:none}
+.reference-table td:first-child{overflow:visible}
+
+
+/* Compact 2D NACA section selection and geometry preview */
+#wingAirfoilSetup .airfoil-setup-layout{grid-template-columns:minmax(190px,.7fr) minmax(290px,1.4fr);align-items:center;gap:18px;margin:16px 0 0}
+#wingAirfoilSetup .airfoil-selector-panel{align-self:center}
+#wingAirfoilSetup .airfoil-large-label{margin-bottom:10px}
+#wingAirfoilSetup .airfoil-profile-panel{border:1px solid #2e5261;border-radius:11px;background:#101e30;padding:10px;min-width:0}
+#wingAirfoilSetup .airfoil-profile-caption{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;font-weight:750;letter-spacing:.07em;color:#b5ccda;margin:0 0 8px}
+#wingAirfoilSetup .airfoil-profile-caption span{color:#70e3da}
+#wingAirfoilSetup #airfoilProfile{width:100%;height:auto;display:block}
+@media(max-width:760px){#wingAirfoilSetup .airfoil-setup-layout{grid-template-columns:1fr}}
+
+/* Control-surface ratios and live sizing */
+.control-input-title{color:#a9e3da;margin:16px 0 4px;padding-top:8px;border-top:1px solid #294054;font-size:.9rem}
+.control-reference-table th,.control-reference-table td{white-space:normal;min-width:90px}
+.control-surface-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:19px}
+.control-surface-result{border:1px solid #31465a;background:#102034;border-radius:10px;padding:14px;min-width:0}
+.control-surface-result h4{font-size:1rem;margin:0 0 9px;color:#84eadb}
+.control-surface-result .result{gap:8px;padding:6px 0;font-size:.82rem}
+.control-surface-result .result span{min-width:0}
+.control-surface-result .result b{white-space:nowrap}
+.control-check{font-size:.76rem;color:#f1c28b;margin:10px 0 0;line-height:1.5}
+@media(max-width:920px){.control-surface-results{grid-template-columns:1fr}}
+.preview-subhead{font-size:.9rem;font-weight:700;color:#c4d9ea;margin:19px 0 8px}.geometry-previews .card svg{max-width:100%}
+/* Geometry fields stay readable even in narrow sidebars */
+.fieldset .control-input-title{font-size:.77rem;color:#72e0d0;margin:18px 0 10px}
+
+/* Version 16: mission-first, six-tab organization */
+.design-controls-card{margin-bottom:16px}
+.design-input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;align-items:start}
+.design-input-group{margin:0;padding:0;border-top:0;min-width:0}
+.design-input-group h3{font-size:.94rem;color:var(--teal);margin:0 0 14px}
+.design-input-group .field{grid-template-columns:minmax(0,1fr) minmax(100px,145px);gap:12px}
+.design-input-group .field label{font-size:.82rem}
+.design-input-group .field input{width:100%}
+.design-input-group .control-input-title{margin:19px 0 10px;color:var(--ink)}
+.design-input-group p.fine{margin:0 0 15px}
+#pane-powerplant .design-input-group{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 22px}
+#pane-powerplant .design-input-group>h3{grid-column:1/-1}
+#pane-powerplant .design-input-group .field{margin:8px 0}
+@media(max-width:1100px){.design-input-grid{grid-template-columns:1fr}#pane-powerplant .design-input-group{grid-template-columns:1fr}}
+@media(max-width:650px){.design-input-group .field{grid-template-columns:1fr;gap:5px}.design-input-group .field input{text-align:left}#pane-powerplant .design-input-group{grid-template-columns:1fr}}
+</style></head><body><div class="app">
+<header class="top"><div class="brand"><div class="logo">UAV</div><div><h1>UAV <span style="color:var(--teal)">DESIGN CALCULATOR</span></h1><span role="status" style="display:inline-block;margin-top:7px;border:1px solid #c48c48;color:#ffda9a;background:#402d19;border-radius:999px;padding:3px 10px;font-size:11px;font-weight:800;letter-spacing:.06em">UNDER DEVELOPMENT · TESTING</span><p>MISSION-FIRST FIXED-WING &amp; HYBRID VTOL SIZING · PRELIMINARY TOOL · NOT FLIGHT VALIDATED</p></div></div><div class="actions"><button class="btn" id="resetBtn">New design</button><button class="btn" id="downloadBtn">Export results</button><button class="btn primary" id="printBtn">Print / PDF</button></div></header>
+<div class="layout"><aside class="sidebar"><div class="smallcap">Design inputs</div><h2>Mission requirements</h2><p class="sub">Start with the mission. Change geometry and propulsion in their dedicated sections.</p>
+<div class="project-controls"><label class="smallcap" for="projectName">Project name</label><input id="projectName" maxlength="100" placeholder="My UAV concept" type="text" value="Untitled UAV"/><label class="smallcap" for="preset">Starting configuration</label><select id="preset"><option value="fixed">Fixed-wing example</option><option value="hybrid">Hybrid VTOL example</option></select><p class="note" style="margin:4px 0 0">Presets are editable examples, not aircraft specifications.</p><button class="btn" id="loadBtn" style="width:100%;margin-top:12px" type="button">Import saved project (JSON)</button><input accept=".json,application/json" hidden="" id="importFile" type="file"/></div>
+<div class="fieldset"><h3>01 / Mission requirements</h3><div class="field"><label for="payload">Payload mass <small>kg • included in MTOW</small></label><input id="payload" min="0" step="0.1" type="number"/></div>
+<div class="field"><label for="rangeTarget">Required mission range <small>km • one-way ground-distance target</small></label><input id="rangeTarget" min="0" step="1" type="number"/></div>
+<div class="field"><label for="mass">Total mass <small>kg • MTOW assumption</small></label><input id="mass" min="0.1" step="0.1" type="number"/></div>
+<div class="field"><label for="stall">Target stall speed <small>m/s</small></label><input id="stall" min="0.1" step="0.1" type="number"/></div>
+<div class="field"><label for="cruise">Cruise speed <small>m/s</small></label><input id="cruise" min="0.1" step="0.1" type="number"/></div>
+<div class="field"><label for="endurance">Endurance <small>minutes</small></label><input id="endurance" min="0" step="5" type="number"/></div>
+<div class="field"><label for="altitude">Design altitude <small>m above mean sea level · ISA standard atmosphere</small></label><input id="altitude" max="20000" min="0" step="100" type="number"/></div>
+<div class="field"><label for="rho">Calculated air density <small>kg/m³ · automatic</small></label><input aria-readonly="true" id="rho" readonly="" step="any" type="number"/><small class="fine">Automatically calculated from altitude; used in wing sizing, lift, drag and power.</small></div></div>
+
+
+
+</aside>
+<main class="main"><nav aria-label="Sections" class="tabs"><button class="tab active" data-pane="mission">01 Mission</button><button class="tab" data-pane="overview">02 Overview</button><button class="tab" data-pane="geometry">03 Geometry</button><button class="tab" data-pane="flight">04 Flight</button><button class="tab" data-pane="powerplant">05 Power Plant</button><button class="tab" data-pane="bom">06 Parts</button></nav>
+<section class="pane active" id="pane-mission">
+<div class="card"><div class="smallcap">STEP 01 / MISSION FIRST</div><h2 style="margin:6px 0 12px;font-size:1.8rem">Define the mission before sizing the aircraft</h2><p>Set payload, target range, endurance, design altitude, cruise speed, stall speed and takeoff mass in the left panel. Air density and viscosity update automatically from ISA altitude. The calculator uses these targets to derive wing area, geometry and a preliminary mission energy budget. Iteratively revise mass after estimating structure, motors and battery.</p><div class="notice" id="missionAlerts"></div></div>
+<div class="kpis"><div class="metric"><label>Mission target range</label><strong id="mTarget">—</strong><small>km</small></div><div class="metric"><label>Modeled cruise distance</label><strong id="mDistance">—</strong><small>km • no wind</small></div><div class="metric"><label>Time for cruise segment</label><strong id="mCruiseTime">—</strong><small>min • non-overlapping phases</small></div><div class="metric"><label>Target payload fraction</label><strong id="mPayload">—</strong><small>of MTOW</small></div></div>
+<div class="cols"><div class="card"><h3>Mission to preliminary design</h3><div id="missionResults"></div></div><div class="card"><h3>Design workflow</h3><div class="callouts"><div class="callout"><strong>1. Mission requirements</strong><p>Set payload, flight distance, endurance, operating altitude and flight speeds.</p></div><div class="callout"><strong>2. Mass + wing</strong><p>Estimate MTOW and derive required wing area, span, chord, lift and drag.</p></div><div class="callout"><strong>3. Fuselage + tail</strong><p>Choose tail-volume coefficients and fuselage ratios from starting-point reference tables.</p></div><div class="callout"><strong>4. Propulsion + battery</strong><p>Use propulsive efficiency to estimate required electrical power, add mission phases and select real components.</p></div><div class="callout"><strong>5. Validate and iterate</strong><p>Check CG, stability, airfoil data, propulsion bench testing, mass budget and structural strength externally.</p></div></div></div></div></section><section class="pane" id="pane-overview"><div class="kpis"><div class="metric"><label>Wing span</label><strong id="kSpan">—</strong><small>computed wing geometry</small></div><div class="metric"><label>Required wing area</label><strong id="kArea">—</strong><small>m²</small></div><div class="metric"><label>Estimated cruise power</label><strong id="kPower">—</strong><small>W drag-based estimate</small></div><div class="metric"><label>Estimated range</label><strong id="kRange">—</strong><small>km at entered speed / endurance</small></div></div>
+<div class="notice" id="checks"></div><div class="cols"><div class="card"><h3>Wing planform — top view</h3><p>Quarter-chord sweep and mounting X offset are drawn to scale within this view.</p><svg aria-label="Wing geometry top view" class="chart" id="wingSVG" viewbox="0 0 530 240"><rect fill="#101e30" height="240" rx="10" width="530" x="0" y="0"></rect><line stroke="#43627a" stroke-dasharray="5 6" x1="265" x2="265" y1="15" y2="225"></line><polygon fill="#2f9ea6" fill-opacity=".7" id="wingShape" points="" stroke="#75e7d7" stroke-width="2"></polygon><text fill="#9eb2c7" font-size="13" id="wingCap" x="14" y="220"></text></svg></div><div class="card"><h3>Wing front view</h3><p>Dihedral and vertical mounting offset; dimensions in meters.</p><svg aria-label="Live front view of wing dihedral and mounting offset" class="chart" id="wingFrontSVG" role="img" viewbox="0 0 530 240"></svg></div><div class="card"><h3>Mission snapshot</h3><p>Key sizing values calculated from current inputs.</p><div id="overviewResults"></div></div></div>
+<div class="cols geometry-previews">
+<div class="card"><h3>Fuselage profile</h3><p>Dimensioned side-view concept based on the current fuselage length, diameter and tail-cone ratio.</p>
+<svg aria-label="Live dimensioned fuselage side profile" class="chart" id="fuselageSVG" role="img" viewbox="0 0 530 240"></svg>
+<p class="fine">Illustrative axisymmetric body; nose, cabin and tail-cone shaping are not structural or aerodynamic validation.</p>
+</div>
+<div class="card"><h3>Tail planform</h3><p>Live horizontal-tail top view and vertical-fin side view, calculated using the tail-volume inputs.</p>
+<svg aria-label="Live dimensioned horizontal and vertical tail preview" class="chart" id="tailSVG" role="img" viewbox="0 0 530 240"></svg><h4 class="preview-subhead">Tail front view</h4><svg aria-label="Live front view of horizontal-tail dihedral and vertical-fin cant" class="chart" id="tailFrontSVG" role="img" viewbox="0 0 530 240"></svg>
+<p class="fine">Horizontal-tail sweep, dihedral and offsets and vertical-fin sweep, cant and offsets are previewed; final stability, control and interference require validation.</p>
+</div>
+</div>
+<div class="card"><h3>Power versus cruise speed</h3><p>Simplified parasite + induced drag model across speed. This is aerodynamic power, not motor electrical draw.</p><svg aria-label="Power required as a function of cruise velocity" class="chart" id="powerChart" role="img" viewbox="0 0 750 245"></svg></div></section>
+<section class="pane" id="pane-geometry"><div class="card" id="wingAirfoilSetup"><div class="smallcap">02 / WING DESIGN</div><h3>NACA airfoil</h3>
+<div class="airfoil-setup-layout">
+<div class="airfoil-selector-panel"><label class="airfoil-large-label" for="airfoil">Select 2D NACA section</label>
+<select class="airfoil-select" id="airfoil"><option value="naca2412">NACA 2412</option><option value="naca0012">NACA 0012</option><option value="naca2410">NACA 2410</option><option value="naca2415">NACA 2415</option><option value="naca4412">NACA 4412</option></select>
+</div>
+<div class="airfoil-profile-panel"><div class="airfoil-profile-caption">2D AIRFOIL PROFILE <span id="airfoilProfileName">NACA 2412</span></div>
+<svg aria-label="Live 2D NACA airfoil cross-section profile" id="airfoilProfile" role="img" viewbox="0 0 600 185"></svg></div>
+</div>
+</div><div class="card design-controls-card"><h3>Aircraft geometry — editable parameters</h3><p>Define wing, fuselage and tail geometry here. Results and drawings update automatically.</p><div class="design-input-grid"><div class="fieldset design-input-group"><h3>Main wing geometry</h3>
+<div class="field"><label for="ar">Wing aspect ratio <small>dimensionless</small></label><input id="ar" min="1" step="0.1" type="number"/></div>
+<div class="field"><label for="taper">Wing taper ratio <small>tip / root</small></label><input id="taper" min="0.05" step="0.05" type="number"/></div><div class="field"><label for="wingSweep">Wing sweep <small>degrees · quarter-chord line, aft positive</small></label><input id="wingSweep" max="45" min="-30" step="0.5" type="number"/></div>
+<div class="field"><label for="wingDihedral">Wing dihedral <small>degrees · tips up positive</small></label><input id="wingDihedral" max="20" min="-15" step="0.5" type="number"/></div>
+<div class="field"><label for="wingXOffset">Wing X offset <small>m · from 35% fuselage length reference</small></label><input id="wingXOffset" max="2" min="-2" step="0.01" type="number"/></div>
+<div class="field"><label for="wingZOffset">Wing Z offset <small>m · from fuselage centerline</small></label><input id="wingZOffset" max="2" min="-2" step="0.01" type="number"/></div>
+</div><div class="fieldset design-input-group"><h3>Fuselage &amp; tail geometry</h3>
+<div class="field"><label for="fuseRatio">Fuselage / span <small>design ratio</small></label><input id="fuseRatio" min="0.1" step="0.05" type="number"/></div>
+<div class="field"><label for="fuseSlender">Fuselage L / D <small>slenderness</small></label><input id="fuseSlender" min="1" step="0.5" type="number"/></div>
+<div class="field"><label for="tailArmRatio">Tail arm / fuselage <small>design ratio</small></label><input id="tailArmRatio" min="0.1" step="0.01" type="number"/></div>
+<div class="field"><label for="vh">Horizontal tail volume <small>Vh</small></label><input id="vh" min="0.01" step="0.05" type="number"/></div>
+<div class="field"><label for="vv">Vertical tail volume <small>Vv</small></label><input id="vv" min="0.001" step="0.005" type="number"/></div><h4 class="control-input-title">Horizontal stabilizer geometry</h4>
+<div class="field"><label for="htSweep">Horizontal tail sweep <small>degrees · quarter chord, aft positive</small></label><input id="htSweep" max="45" min="-30" step="0.5" type="number"/></div>
+<div class="field"><label for="htDihedral">Horizontal tail dihedral <small>degrees · tips up positive</small></label><input id="htDihedral" max="20" min="-15" step="0.5" type="number"/></div>
+<div class="field"><label for="htXOffset">Horizontal tail X offset <small>m · from nominal tail station (wing + tail arm)</small></label><input id="htXOffset" max="2" min="-2" step="0.01" type="number"/></div>
+<div class="field"><label for="htZOffset">Horizontal tail Z offset <small>m · from fuselage centerline</small></label><input id="htZOffset" max="2" min="-2" step="0.01" type="number"/></div>
+<h4 class="control-input-title">Vertical stabilizer geometry</h4>
+<div class="field"><label for="vtSweep">Vertical fin sweep <small>degrees · leading-edge line, aft positive</small></label><input id="vtSweep" max="55" min="-30" step="0.5" type="number"/></div>
+<div class="field"><label for="vtCant">Vertical fin cant <small>degrees · outward from vertical</small></label><input id="vtCant" max="25" min="0" step="0.5" type="number"/></div>
+<div class="field"><label for="vtXOffset">Vertical fin X offset <small>m · from nominal tail station (wing + tail arm)</small></label><input id="vtXOffset" max="2" min="-2" step="0.01" type="number"/></div>
+<div class="field"><label for="vtZOffset">Vertical fin Z offset <small>m · from fuselage centerline</small></label><input id="vtZOffset" max="2" min="-2" step="0.01" type="number"/></div><div class="field"><label for="tailConeRatio">Tail-cone length / fuselage diameter <small>design ratio</small></label><input id="tailConeRatio" min="0" step=".1" type="number"/></div><div class="field"><label for="tailConeAngle">Tail-cone half-angle <small>degrees • geometric input</small></label><input id="tailConeAngle" max="40" min="0" step="1" type="number"/></div></div></div></div><div class="card design-controls-card"><h3>Control surface geometry</h3><div class="fieldset design-input-group"><h3>Control surfaces</h3><p class="fine">Editable starting ratios from the Excel control-surface reference table. Area and geometric ratios are checked independently.</p><h4 class="control-input-title">Aileron</h4><div class="field"><label for="ailArea">Area ratio <small>0.03–0.12 · control area / parent surface area</small></label><input id="ailArea" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="ailSpan">Span ratio <small>0.20–0.40 · control span / parent surface span</small></label><input id="ailSpan" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="ailChord">Chord ratio <small>0.15–0.30 · control chord / parent surface chord</small></label><input id="ailChord" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="ailNeg">Negative deflection <small>degrees · magnitude</small></label><input id="ailNeg" max="90" min="0" step="1" type="number"/></div><div class="field"><label for="ailPos">Positive deflection <small>degrees · magnitude</small></label><input id="ailPos" max="90" min="0" step="1" type="number"/></div><h4 class="control-input-title">Elevator</h4><div class="field"><label for="eleArea">Area ratio <small>0.15–0.40 · control area / parent surface area</small></label><input id="eleArea" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="eleSpan">Span ratio <small>0.80–1.00 · control span / parent surface span</small></label><input id="eleSpan" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="eleChord">Chord ratio <small>0.20–0.40 · control chord / parent surface chord</small></label><input id="eleChord" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="eleNeg">Negative deflection <small>degrees · magnitude</small></label><input id="eleNeg" max="90" min="0" step="1" type="number"/></div><div class="field"><label for="elePos">Positive deflection <small>degrees · magnitude</small></label><input id="elePos" max="90" min="0" step="1" type="number"/></div><h4 class="control-input-title">Rudder</h4><div class="field"><label for="rudArea">Area ratio <small>0.15–0.35 · control area / parent surface area</small></label><input id="rudArea" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="rudSpan">Span ratio <small>0.70–1.00 · control span / parent surface span</small></label><input id="rudSpan" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="rudChord">Chord ratio <small>0.15–0.40 · control chord / parent surface chord</small></label><input id="rudChord" max="1" min="0.01" step="0.01" type="number"/></div><div class="field"><label for="rudNeg">Negative deflection <small>degrees · magnitude</small></label><input id="rudNeg" max="90" min="0" step="1" type="number"/></div><div class="field"><label for="rudPos">Positive deflection <small>degrees · magnitude</small></label><input id="rudPos" max="90" min="0" step="1" type="number"/></div></div></div>
+<div class="cols"><div class="card"><h3>Wing sizing from airfoil + mission &amp; VLM2</h3><div id="wingResults"></div></div><div class="card"><h3>Fuselage &amp; tails</h3><p>Conventional tail-volume estimates based on wing span and MAC.</p><div id="tailResults"></div></div></div><div class="card" id="airfoilDatabaseCard"><div class="smallcap">AIRFOIL DATABASE / SECTION POLARS</div><h3>NACA stall polar &amp; VLM2 finite-wing analysis</h3><div class="table-scroll"><table class="table reference-table airfoil-table"><thead><tr><th>Airfoil <button aria-label="Information: NACA airfoil section identifier." class="info-tip" data-help="NACA airfoil section identifier." title="NACA airfoil section identifier." type="button">i</button></th><th>cₗ,max @ Re 200k <button aria-label="Information: Approximate 2D maximum section lift coefficient at Reynolds number 200,000, not whole-wing CLmax." class="info-tip" data-help="Approximate 2D maximum section lift coefficient at Reynolds number 200,000, not whole-wing CLmax." title="Approximate 2D maximum section lift coefficient at Reynolds number 200,000, not whole-wing CLmax." type="button">i</button></th><th>@ 1M <button aria-label="Information: Approximate 2D maximum lift coefficient at Reynolds number 1,000,000." class="info-tip" data-help="Approximate 2D maximum lift coefficient at Reynolds number 1,000,000." title="Approximate 2D maximum lift coefficient at Reynolds number 1,000,000." type="button">i</button></th><th>@ 5M <button aria-label="Information: Approximate 2D maximum lift coefficient at Reynolds number 5,000,000." class="info-tip" data-help="Approximate 2D maximum lift coefficient at Reynolds number 5,000,000." title="Approximate 2D maximum lift coefficient at Reynolds number 5,000,000." type="button">i</button></th></tr></thead><tbody id="airfoilDataRows"></tbody></table></div><div id="airfoilResults"></div><div class="cols"><div><h3 style="margin-top:18px">VLM2 cruise &amp; stall analysis</h3><div id="vlmResults"></div></div><div><h3 style="margin-top:18px">Spanwise lift distribution</h3><svg aria-label="Calculated wing local lift coefficient versus span" id="vlmSpanChart" role="img" style="width:100%;height:auto;background:#101e30;border-radius:10px" viewbox="0 0 510 235"></svg><p class="fine">Blue: local cₗ at cruise · dashed: airfoil cₗ,max near stall. Spanwise values exclude nonlinear separation and control deflections.</p></div></div><p class="fine">The values are approximate stored section cₗ,max summaries (Ncrit 9), not experimental whole-wing results. The section stall limit is imposed externally; inviscid VLM2 cannot resolve stall or viscous/profile drag. Changes in taper, twist, sweep, Reynolds number, surface roughness and stall progression can alter wing C<sub>L,max</sub>. Verify using XFOIL polars and finite-wing analysis (e.g., XFLR5 or CFD) before flight.</p><p class="fine">Polar summaries: <a href="https://foil.tools/foil/naca2412" rel="noopener noreferrer" target="_blank">Foil.tools dataset ↗</a> · Geometry references: <a href="https://m-selig.web.engr.illinois.edu/ads/coord_database.html" rel="noopener noreferrer" target="_blank">UIUC airfoil coordinates ↗</a></p></div><div class="card" id="controlSurfaceCard"><h3>Control surface sizing</h3><p>Ratios from the control-surface sizing table in your Excel workbook. Edit values in the left sidebar; dimensions update with wing and tail geometry.</p>
+<div class="table-scroll"><table class="table reference-table control-reference-table"><thead><tr><th>Reference parameter</th><th>Aileron</th><th>Elevator</th><th>Rudder</th></tr></thead><tbody><tr><td>Area / lifting-surface area <button aria-label="Information: Area of the control surface as a fraction of the parent wing or tail area." class="info-tip" data-help="Area of the control surface as a fraction of the parent wing or tail area." title="Area of the control surface as a fraction of the parent wing or tail area." type="button">i</button></td><td>0.03–0.12</td><td>0.15–0.40</td><td>0.15–0.35</td></tr><tr><td>Span / lifting-surface span <button aria-label="Information: Ratio of total modeled control span to the wing or stabilizer span." class="info-tip" data-help="Ratio of total modeled control span to the wing or stabilizer span." title="Ratio of total modeled control span to the wing or stabilizer span." type="button">i</button></td><td>0.20–0.40</td><td>0.80–1.00</td><td>0.70–1.00</td></tr><tr><td>Chord / lifting-surface chord <button aria-label="Information: Ratio of a representative control chord to a representative parent-surface chord." class="info-tip" data-help="Ratio of a representative control chord to a representative parent-surface chord." title="Ratio of a representative control chord to a representative parent-surface chord." type="button">i</button></td><td>0.15–0.30</td><td>0.20–0.40</td><td>0.15–0.40</td></tr><tr><td>Negative deflection <button aria-label="Information: Illustrative maximum deflection magnitude in the negative direction." class="info-tip" data-help="Illustrative maximum deflection magnitude in the negative direction." title="Illustrative maximum deflection magnitude in the negative direction." type="button">i</button></td><td>25°</td><td>25°</td><td>30°</td></tr><tr><td>Positive deflection <button aria-label="Information: Illustrative maximum deflection magnitude in the positive direction." class="info-tip" data-help="Illustrative maximum deflection magnitude in the positive direction." title="Illustrative maximum deflection magnitude in the positive direction." type="button">i</button></td><td>20°</td><td>20°</td><td>30°</td></tr></tbody></table></div><div id="controlResults"></div><p class="fine">Aileron dimensions describe a total span/area allowance (split across left and right as needed). Area, span and chord ratios are independent design guidelines, so their implied areas may differ. Deflection angles are preliminary limits, not verified hinge moments or control authority.</p></div><div class="cols"><div class="card"><h3>Fuselage sizing reference table</h3><p>Conceptual starting ranges adapted from the ratio tables in the supplied workbook, not universal design rules.</p><div class="table-scroll"><table class="table reference-table"><thead><tr><th>Parameter</th><th>Typical starting guide</th><th>Current value</th></tr></thead><tbody><tr><td>Fuselage length / wingspan <button aria-label="Information: Ratio of fuselage length to wing span. A preliminary layout guide, not an aerodynamic requirement." class="info-tip" data-help="Ratio of fuselage length to wing span. A preliminary layout guide, not an aerodynamic requirement." title="Ratio of fuselage length to wing span. A preliminary layout guide, not an aerodynamic requirement." type="button">i</button></td><td>0.60–0.75</td><td id="fuseRatioNow">—</td></tr><tr><td>Fuselage length / diameter <button aria-label="Information: Fuselage slenderness ratio: overall length divided by an equivalent body diameter. Actual cross sections need not be circular." class="info-tip" data-help="Fuselage slenderness ratio: overall length divided by an equivalent body diameter. Actual cross sections need not be circular." title="Fuselage slenderness ratio: overall length divided by an equivalent body diameter. Actual cross sections need not be circular." type="button">i</button></td><td>4–8</td><td id="slenderNow">—</td></tr><tr><td>Tail-cone length / diameter <button aria-label="Information: Length of the aft fuselage taper divided by the equivalent fuselage diameter. Check structure and tail clearance." class="info-tip" data-help="Length of the aft fuselage taper divided by the equivalent fuselage diameter. Check structure and tail clearance." title="Length of the aft fuselage taper divided by the equivalent fuselage diameter. Check structure and tail clearance." type="button">i</button></td><td>≈ 2 (example)</td><td id="coneNow">—</td></tr><tr><td>Tail-cone half-angle <button aria-label="Information: Angle between the fuselage axis and the tapered tail-cone surface. The workbook range is illustrative." class="info-tip" data-help="Angle between the fuselage axis and the tapered tail-cone surface. The workbook range is illustrative." title="Angle between the fuselage axis and the tapered tail-cone surface. The workbook range is illustrative." type="button">i</button></td><td>2–9° (reference only)</td><td id="angleNow">—</td></tr></tbody></table></div><p class="fine">Check packaging, manufacturing, CG location, tail clearance and drag independently. Diameter is an equivalent estimate; real fuselages need not be circular.</p></div>
+<div class="card"><h3>Tail volume coefficient reference</h3><p>Illustrative conventional-tail starting values from the supplied spreadsheet. The vertical coefficient is a separate manual input and not interchangeable with horizontal volume.</p><div class="table-scroll"><table class="table reference-table"><thead><tr><th>Aircraft / concept</th><th>Horizontal V<sub>h</sub></th><th>Use</th></tr></thead><tbody><tr><td>Sailplane example <button aria-label="Information: Illustrative horizontal-tail volume coefficient for conventional sailplane-style layouts; verify stability and CG." class="info-tip" data-help="Illustrative horizontal-tail volume coefficient for conventional sailplane-style layouts; verify stability and CG." title="Illustrative horizontal-tail volume coefficient for conventional sailplane-style layouts; verify stability and CG." type="button">i</button></td><td>0.50</td><td><button class="btn tiny" data-tailpreset="0.5">Apply</button></td></tr><tr><td>Home-built example <button aria-label="Information: Illustrative horizontal-tail volume coefficient for light conventional aircraft; not a universal rule." class="info-tip" data-help="Illustrative horizontal-tail volume coefficient for light conventional aircraft; not a universal rule." title="Illustrative horizontal-tail volume coefficient for light conventional aircraft; not a universal rule." type="button">i</button></td><td>0.50</td><td><button class="btn tiny" data-tailpreset="0.5">Apply</button></td></tr><tr><td>Single-engine GA example <button aria-label="Information: Illustrative horizontal-tail volume coefficient for a conventional general-aviation aircraft." class="info-tip" data-help="Illustrative horizontal-tail volume coefficient for a conventional general-aviation aircraft." title="Illustrative horizontal-tail volume coefficient for a conventional general-aviation aircraft." type="button">i</button></td><td>0.70</td><td><button class="btn tiny" data-tailpreset="0.7">Apply</button></td></tr><tr><td>Canard example <button aria-label="Information: Canard arrangements require different longitudinal stability and surface-loading analysis; do not apply this directly to a conventional tail." class="info-tip" data-help="Canard arrangements require different longitudinal stability and surface-loading analysis; do not apply this directly to a conventional tail." title="Canard arrangements require different longitudinal stability and surface-loading analysis; do not apply this directly to a conventional tail." type="button">i</button></td><td>0.60</td><td>Not a conventional-tail sizing model</td></tr></tbody></table></div><p class="fine">For a conventional tail: V<sub>h</sub> = S<sub>h</sub> l<sub>h</sub> / (S<sub>w</sub> MAC), V<sub>v</sub> = S<sub>v</sub> l<sub>v</sub> / (S<sub>w</sub> b). A canard needs a different stability/layout analysis.</p></div></div></section>
+<section class="pane" id="pane-flight"><div class="cols"><div class="card"><h3>Level cruise</h3><p>Simple lift, thrust and power estimates.</p><div id="cruiseResults"></div></div><div class="card"><h3>Climb</h3><p>Climb velocity and power estimates from simplified performance relations.</p><div id="climbResults"></div></div></div><div class="card"><h3>Airfoil Reynolds numbers</h3><p>Reynolds number = speed × wing MAC / kinematic viscosity; choose viscosity for the intended atmospheric conditions.</p><div id="reResults"></div></div></section>
+<section class="pane" id="pane-powerplant"><div class="card design-controls-card"><h3>Power plant — motors, battery and electrical system</h3><p>Configure propulsion electrical power, motor count, climb and VTOL phases, voltage and battery usable capacity.</p><div class="fieldset design-input-group"><h3>Motor, battery &amp; mission power inputs</h3>
+<div class="field"><label for="voltage">Battery voltage <small>V</small></label><input id="voltage" min="1" step="0.1" type="number"/></div>
+<div class="field"><label for="pCruise">Cruise electric power <small>W • measured / assumed</small></label><input id="pCruise" min="0" step="5" type="number"/></div>
+<div class="field"><label for="pClimb">Climb electric power <small>W • measured / assumed</small></label><input id="pClimb" min="0" step="5" type="number"/></div>
+<div class="field"><label for="pVTOL">VTOL electrical power per motor <small>W</small></label><input id="pVTOL" min="0" step="5" type="number"/></div>
+<div class="field"><label for="vtolMotors">VTOL motors <small>0 for fixed-wing</small></label><input id="vtolMotors" min="0" step="1" type="number"/></div>
+<div class="field"><label for="climbAltitude">Climb height gained <small>m • distinct from design altitude above sea level</small></label><input id="climbAltitude" min="0" step="10" type="number"/></div>
+<div class="field"><label for="climbTime">Climb duration <small>minutes</small></label><input id="climbTime" min="0" step="1" type="number"/></div>
+<div class="field"><label for="vtolTime">VTOL duration <small>minutes</small></label><input id="vtolTime" min="0" step="1" type="number"/></div>
+<div class="field"><label for="usable">Usable battery fraction <small>0.8 = 80%</small></label><input id="usable" max="1" min="0.1" step="0.05" type="number"/></div><div class="field"><label for="propEff">Propulsion efficiency <small>0–1, assumed total propeller/drive efficiency</small></label><input id="propEff" max="1" min="0.05" step=".05" type="number"/></div><div class="field"><label for="auxPower">Avionics / payload electrical power <small>W in all flight phases</small></label><input id="auxPower" min="0" step="1" type="number"/></div><div class="field"><label for="kinVisc">Calculated kinematic viscosity <small>m²/s · automatic</small></label><input aria-readonly="true" id="kinVisc" readonly="" step="any" type="number"/><small class="fine">Computed using ISA temperature and Sutherland viscosity for Reynolds-number estimates.</small></div></div></div><div class="kpis"><div class="metric"><label>Total mission energy</label><strong id="eEnergy">—</strong><small>Wh, power allowances</small></div><div class="metric"><label>Battery capacity</label><strong id="eCap">—</strong><small>mAh at selected voltage</small></div><div class="metric"><label>Required rated energy</label><strong id="eRated">—</strong><small>Wh including usable fraction</small></div><div class="metric"><label>Battery reserve</label><strong id="eMargin">—</strong><small>factor from usable fraction</small></div></div><div class="cols"><div class="card"><h3>Mission energy breakdown</h3><p>Separate contributions from forward cruise, climb and VTOL motors.</p><div id="energyResults"></div></div><div class="card"><h3>Energy distribution</h3><p>Proportion of modeled total electrical energy.</p><svg aria-label="Energy allocation bar chart" class="chart" id="energyChart" role="img" viewbox="0 0 490 230"></svg></div></div><div class="notice">Mission duration is divided into non-overlapping cruise, climb and VTOL phases. Energy includes auxiliary loads and an editable propulsion efficiency estimate for minimum required cruise/climb power. Always verify real propulsion curves, battery sag and reserve.</div><div class="card"><h3>Component-sizing guide — before searching AliExpress</h3><p>Calculated requirement hints only. Check motor/propeller test curves, ESC ratings, battery discharge ratings, mass and dimensions from each seller's datasheet.</p><div id="partGuidance"></div><div class="quick-search"><a href="https://www.aliexpress.com/w/wholesale-brushless-motor-for-rc-airplane.html" rel="noopener noreferrer" target="_blank">Find propulsion motors ↗</a><a href="https://www.aliexpress.com/w/wholesale-lipo-battery-rc-plane.html" rel="noopener noreferrer" target="_blank">Find batteries ↗</a><a href="https://www.aliexpress.com/w/wholesale-brushless-esc-rc-airplane.html" rel="noopener noreferrer" target="_blank">Find ESCs ↗</a></div></div></section>
+<section class="pane" id="pane-bom"><div class="kpis"><div class="metric"><label>Component cost</label><strong id="bCost">—</strong><small>user-defined currency units</small></div><div class="metric"><label>Known component mass</label><strong id="bMass">—</strong><small>kg, excludes missing mass entries</small></div><div class="metric"><label>Listed lines</label><strong id="bLines">—</strong><small>custom BOM items</small></div><div class="metric"><label>Budget / mass gap</label><strong id="bGap">—</strong><small>kg vs entered MTOW</small></div></div><div class="card"><h3>Editable components and AliExpress product discovery</h3><button class="btn" id="addPartBtn" style="margin:8px 0 13px" type="button">+ Add component</button><button class="btn" id="addPartsTemplate" style="margin:8px" type="button">+ Common UAV components</button><p class="fine">Search AliExpress for motors, ESCs, props, batteries, flight controllers and servos. Compare ratings and sellers manually; these are search links, not live prices or verified product matches.</p><div class="quick-search" id="quickSearch"><a href="https://www.aliexpress.com/w/wholesale-brushless-motor-for-rc-plane.html" rel="noopener noreferrer" target="_blank">Motors ↗</a><a href="https://www.aliexpress.com/w/wholesale-lipo-battery-for-rc-plane.html" rel="noopener noreferrer" target="_blank">Batteries ↗</a><a href="https://www.aliexpress.com/w/wholesale-brushless-esc-rc-airplane.html" rel="noopener noreferrer" target="_blank">ESCs ↗</a><a href="https://www.aliexpress.com/w/wholesale-rc-airplane-propeller.html" rel="noopener noreferrer" target="_blank">Propellers ↗</a><a href="https://www.aliexpress.com/w/wholesale-pixhawk-flight-controller.html" rel="noopener noreferrer" target="_blank">Autopilot ↗</a></div><p>Add your own components, quantities, unit masses and costs. Price units are chosen by you. Component mass and aircraft MTOW should be checked independently.</p><div class="table-scroll"><table class="table"><thead><tr><th>Part / component</th><th class="right">Qty</th><th class="right">Mass (g/ea)</th><th class="right">Price / ea</th><th class="right">Total mass (g)</th><th class="right">Cost</th><th>Marketplace</th><th> </th></tr></thead><tbody id="bomRows"></tbody><tfoot><tr><th>Total</th><th></th><th></th><th></th><th class="right" id="bTotalMass">—</th><th class="right money" id="bTotalCost">—</th><th></th><th></th></tr></tfoot></table></div></div></section>
+
+<p class="foot">General UAV Design Calculator • Offline HTML • Preliminary sizing for fixed-wing and quadplane UAVs • Validate before construction or flight.</p></main></div></div>
+<script>
+const presets={
+fixed:{mass:3,stall:11,cruise:20,endurance:45,altitude:0,rho:1.225,ar:8,taper:.65,fuseRatio:.65,fuseSlender:6,tailArmRatio:.62,vh:.5,vv:.025,voltage:14.8,pCruise:140,pClimb:200,pVTOL:0,vtolMotors:0,climbAltitude:120,climbTime:3,vtolTime:0,usable:.8,payload:.5,rangeTarget:40,wingSweep:0,wingDihedral:3,wingXOffset:0,wingZOffset:0,htSweep:0,htDihedral:0,htXOffset:0,htZOffset:0,vtSweep:20,vtCant:0,vtXOffset:0,vtZOffset:0,tailConeRatio:2,tailConeAngle:5,propEff:.7,auxPower:12,kinVisc:1.5e-5,ailArea:.03,ailSpan:.30,ailChord:.27,ailNeg:25,ailPos:20,eleArea:.15,eleSpan:.80,eleChord:.20,eleNeg:25,elePos:20,rudArea:.15,rudSpan:.70,rudChord:.20,rudNeg:30,rudPos:30},
+hybrid:{mass:5,stall:12,cruise:22,endurance:35,altitude:0,rho:1.225,ar:8,taper:.7,fuseRatio:.65,fuseSlender:6,tailArmRatio:.60,vh:.55,vv:.03,voltage:22.2,pCruise:240,pClimb:310,pVTOL:270,vtolMotors:4,climbAltitude:150,climbTime:4,vtolTime:2,usable:.8,payload:1.0,rangeTarget:35,wingSweep:0,wingDihedral:3,wingXOffset:0,wingZOffset:0,htSweep:0,htDihedral:0,htXOffset:0,htZOffset:0,vtSweep:20,vtCant:0,vtXOffset:0,vtZOffset:0,tailConeRatio:2,tailConeAngle:5,propEff:.65,auxPower:20,kinVisc:1.5e-5,ailArea:.03,ailSpan:.30,ailChord:.27,ailNeg:25,ailPos:20,eleArea:.15,eleSpan:.80,eleChord:.20,eleNeg:25,elePos:20,rudArea:.15,rudSpan:.70,rudChord:.20,rudNeg:30,rudPos:30}};
+const airfoilPolars={
+ naca0012:{name:'NACA 0012',clmax:[1.12,1.40,1.76],url:'https://foil.tools/foil/n0012'},
+ naca2410:{name:'NACA 2410',clmax:[1.28,1.50,1.85],url:'https://foil.tools/foil/naca2410'},
+ naca2412:{name:'NACA 2412',clmax:[1.35,1.55,1.87],url:'https://foil.tools/foil/naca2412'},
+ naca2415:{name:'NACA 2415',clmax:[1.40,1.56,1.87],url:'https://foil.tools/foil/naca2415'},
+ naca4412:{name:'NACA 4412',clmax:[1.49,1.67,1.94],url:'https://foil.tools/foil/naca4412'}
+};
+const polarRe=[2e5,1e6,5e6];
+function sectionClmax(foil,Re){
+ if(!airfoilPolars[foil])throw new Error('Unknown NACA airfoil');
+ const values=airfoilPolars[foil].clmax;
+ if(Re<=polarRe[0])return values[0];
+ if(Re>=polarRe[2])return values[2];
+ const i=Re<polarRe[1]?0:1;
+ const w=(Math.log(Re)-Math.log(polarRe[i]))/(Math.log(polarRe[i+1])-Math.log(polarRe[i]));
+ return values[i]+w*(values[i+1]-values[i]);
+}
+const baseline=presets.fixed;
+const initialBom=[]; let bom=JSON.parse(JSON.stringify(initialBom));
+const fmt=(v,n=2)=>Number.isFinite(v)?v.toLocaleString('en-US',{maximumFractionDigits:n,minimumFractionDigits:n}):'—';
+const $=id=>document.getElementById(id);
+const row=(a,b,highlight=false)=>`<div class="result ${highlight?'highlight':''}"><span>${a}</span><b>${b}</b></div>`;
+// International Standard Atmosphere (ISA), geometric altitude approximation,
+// 0–20 km. Pressure/density depend on standard temperature (not live weather).
+function atmosphere(height){
+ const R=287.05287, g=9.80665, T0=288.15, p0=101325, lapse=0.0065;
+ const h=height;
+ let T,p;
+ if(h<=11000){
+   T=T0-lapse*h;
+   p=p0*Math.pow(T/T0,g/(R*lapse));
+ }else{
+   const T11=T0-lapse*11000;
+   const p11=p0*Math.pow(T11/T0,g/(R*lapse));
+   T=T11;
+   p=p11*Math.exp(-g*(h-11000)/(R*T11));
+ }
+ const rho=p/(R*T);
+ const mu=1.458e-6*Math.pow(T,1.5)/(T+110.4); // Sutherland's law
+ return {T,p,rho,mu,nu:mu/rho};
+}
+const inputs=()=>{
+ const values=Object.fromEntries(Object.keys(baseline).map(k=>[k,Number($(k).value)]));
+ const atm=atmosphere(values.altitude);
+ values.rho=atm.rho; values.kinVisc=atm.nu;
+ // Preliminary total profile + parasite CD0 allowance; polar cd(Re,cl) data not yet available.
+ values.cd0=$('preset').value==='hybrid'?0.040:0.034;
+ $('rho').value=Number.isFinite(atm.rho)?atm.rho.toFixed(5):'';
+ $('kinVisc').value=Number.isFinite(atm.nu)?atm.nu.toExponential(6):'';
+ return {...values,airfoil:$('airfoil').value,atmosphereTempC:atm.T-273.15,atmospherePressurePa:atm.p};
+};
+// VLM2: planar vortex-ring lattice, wake rings extended downstream.
+// Geometric angles are small-angle linearized (rad) and zero-lift angle is approximate.
+function vsub(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]]}
+function vortexSegment(p,a,b){
+ const r1=vsub(p,a),r2=vsub(p,b),r0=vsub(b,a);
+ const cross=[r1[1]*r2[2]-r1[2]*r2[1],r1[2]*r2[0]-r1[0]*r2[2],r1[0]*r2[1]-r1[1]*r2[0]];
+ const c2=cross[0]**2+cross[1]**2+cross[2]**2;
+ const n1=Math.hypot(...r1),n2=Math.hypot(...r2);
+ if(c2<1e-20||n1<1e-12||n2<1e-12)return [0,0,0];
+ const projection=r0[0]*(r1[0]/n1-r2[0]/n2)+r0[1]*(r1[1]/n1-r2[1]/n2)+r0[2]*(r1[2]/n1-r2[2]/n2);
+ const gain=projection/(4*Math.PI*c2);
+ return cross.map(v=>v*gain)
+}
+function ringVelocity(p,vertices){let out=[0,0,0];for(let i=0;i<4;i++){let v=vortexSegment(p,vertices[i],vertices[(i+1)%4]);for(let k=0;k<3;k++)out[k]+=v[k]}return out}
+function solveLinear(A,b){const n=b.length;A=A.map(row=>row.slice());b=b.slice();for(let i=0;i<n;i++){let pivot=i;for(let k=i+1;k<n;k++)if(Math.abs(A[k][i])>Math.abs(A[pivot][i]))pivot=k; if(Math.abs(A[pivot][i])<1e-12)throw Error('VLM2 influence matrix singular');[A[pivot],A[i]]=[A[i],A[pivot]];[b[pivot],b[i]]=[b[i],b[pivot]];const diag=A[i][i];for(let j=i;j<n;j++)A[i][j]/=diag;b[i]/=diag;for(let k=i+1;k<n;k++){let f=A[k][i];if(!f)continue;for(let j=i;j<n;j++)A[k][j]-=f*A[i][j];b[k]-=f*b[i]}}let x=Array(n).fill(0);for(let i=n-1;i>=0;i--){x[i]=b[i];for(let j=i+1;j<n;j++)x[i]-=A[i][j]*x[j]}return x}
+function vlm2(AR,taper,sweep=0,dihedral=0,nSpan=18,nChord=3){
+ // unit wing area S=1: coefficients independent of length scale.
+ const S=1,b=Math.sqrt(S*AR),root=2*S/(b*(1+taper)),dy=b/nSpan;
+ function chord(y){return root*(1-(1-taper)*2*Math.abs(y)/b)}
+ // Wing is constructed with quarter-chord sweep and a symmetric dihedral angle.
+ const sweepT=Math.tan(sweep*Math.PI/180),dihedralT=Math.tan(dihedral*Math.PI/180);
+ function at(y,u){const c=chord(y);return [(u-.25)*c+Math.abs(y)*sweepT,y,Math.abs(y)*dihedralT]}
+ let panels=[];for(let j=0;j<nSpan;j++){const yl=-b/2+j*dy,yr=yl+dy,ym=(yl+yr)/2;for(let i=0;i<nChord;i++){
+  let uf=(i+.25)/nChord,ub=(i+1.25)/nChord;
+  const p=at(ym,(i+.75)/nChord),a=at(yl,uf),bb=at(yr,uf),c= i===nChord-1 ? [b*25,yr,0]:at(yr,ub),d=i===nChord-1?[b*25,yl,0]:at(yl,ub);
+  const dySlope=Math.sign(ym)*dihedralT,nrm=[0,-dySlope,1],nlen=Math.hypot(...nrm);
+  panels.push({j,i,yl,yr,ym,chord:chord(ym),point:p,normal:nrm.map(v=>v/nlen),ring:[a,bb,c,d]});
+ }}
+ const A=panels.map(target=>panels.map(src=>{
+ const vel=ringVelocity(target.point,src.ring);return vel.reduce((sum,v,k)=>sum+v*target.normal[k],0)
+ }));
+ // VLM boundary condition: w_induced=-sin(alpha); for unit speed and small alpha.
+ const g=solveLinear(A,panels.map(p=>-p.normal[2])); // Γ per unit alpha (rad), V=1
+ const strip=Array.from({length:nSpan},(_,j)=>g[j*nChord+nChord-1]);
+ const liftSlope=2*strip.reduce((acc,g)=>acc+g*dy,0)/S;
+ const localSlope=strip.map((g,j)=>2*g/chord(-b/2+(j+.5)*dy));
+ // Downwash from wake vortex legs at the plane of the wing.
+ // Ring wake from each trailing-edge panel extends to 25 spans.
+ // Trefftz-plane induced drag via Fourier series of the spanwise circulation.
+ // For symmetric planar wings, e = A1² / Σ(n An²), so e ≤ 1.
+ const modes=8;
+ const F=Array.from({length:modes},(_,m)=>strip.map((_,j)=>Math.sin((m+1)*Math.acos(2*(-b/2+(j+.5)*dy)/b))));
+ const mat=F.map((fm,m)=>F.map((fn,n)=>fm.reduce((acc,f,j)=>acc+f*fn[j],0)));
+ const rhs=F.map(fm=>fm.reduce((acc,f,j)=>acc+f*strip[j],0));
+ const coeff=solveLinear(mat,rhs);
+ const sumHarmonics=coeff.reduce((sum,an,i)=>sum+(i+1)*an*an,0);
+ const spanEfficiency=coeff[0]**2/Math.max(sumHarmonics,1e-16);
+ const CDiSlope=liftSlope**2/(Math.PI*AR*spanEfficiency);
+ const induced=[];
+ return {liftSlope,localSlope,CDiAlpha2:CDiSlope,strip,induced};
+}
+
+function compute(a){
+ const g=9.81,W=a.mass*g;
+ // Iterate area, chordwise/local Reynolds number, 2D stall limits and VLM2 finite-wing lift distribution.
+ let Sreq=2*W/(a.rho*a.stall*a.stall*Math.max(0.2,sectionClmax(a.airfoil,2e5)*.9));
+ const lattice=vlm2(a.ar,a.taper,a.wingSweep,a.wingDihedral);
+ function wingGeom(S){const b=Math.sqrt(S*a.ar),cr=2*S/(b*(1+a.taper)),ct=cr*a.taper;
+ const mac=(2/3)*cr*(1+a.taper+a.taper*a.taper)/(1+a.taper);return {b,cr,ct,mac}}
+ for(let iter=0;iter<100;iter++){
+   const geom=wingGeom(Sreq);
+   const localLimits=lattice.localSlope.map((slope,j)=>{
+     const y=(-.5+(j+.5)/lattice.localSlope.length)*geom.b;
+     const c=geom.cr*(1-(1-a.taper)*2*Math.abs(y)/geom.b);
+     return sectionClmax(a.airfoil,a.stall*c/a.kinVisc)/Math.max(slope,1e-8);
+   });
+   const wingMax=lattice.liftSlope*Math.min(...localLimits);
+   const next=2*W/(a.rho*a.stall*a.stall*wingMax);
+   if(Math.abs(next-Sreq)<1e-11*Math.max(1,Sreq)){Sreq=next;break}
+   Sreq=0.5*Sreq+0.5*next;
+ }
+ const S=Sreq; // mission-first sizing: automatically size wing from weight and stall requirement
+ const {b,cr,ct,mac}=wingGeom(S);
+ const ReTargetStall=a.stall*mac/a.kinVisc, ReCruise=a.cruise*mac/a.kinVisc;
+ const sectionCl=sectionClmax(a.airfoil,ReTargetStall);
+ const localChord=lattice.localSlope.map((_,j)=>cr*(1-(1-a.taper)*2*Math.abs(-.5+(j+.5)/lattice.localSlope.length)));
+ const localMax=localChord.map(c=>sectionClmax(a.airfoil,a.stall*c/a.kinVisc));
+ const effectiveAlphaMax=Math.min(...localMax.map((max,i)=>max/Math.max(lattice.localSlope[i],1e-8)));
+ const wingClmax=lattice.liftSlope*effectiveAlphaMax;
+ const vs=Math.sqrt(2*W/(a.rho*S*wingClmax));
+ const ReActualStall=vs*mac/a.kinVisc;
+ const criticalStrip=localMax.findIndex((v,i)=>Math.abs(v/lattice.localSlope[i]-effectiveAlphaMax)<1e-8);
+ const alphaEffCruise=(2*W/(a.rho*a.cruise*a.cruise*S))/lattice.liftSlope;
+ const alpha0={naca0012:0,naca2410:-2,naca2412:-2,naca2415:-2,naca4412:-4}[a.airfoil];
+ const alphaGeometric=alphaEffCruise*180/Math.PI+(alpha0??0);
+ const liftStallTarget=0.5*a.rho*a.stall*a.stall*S*wingClmax;
+ const lf=a.fuseRatio*b,df=lf/a.fuseSlender,arm=lf*a.tailArmRatio;
+ const armH=Math.max(.05,arm+a.htXOffset-a.wingXOffset),armV=Math.max(.05,arm+a.vtXOffset-a.wingXOffset);
+ const Sh=a.vh*S*mac/armH,Sv=a.vv*S*b/armV;
+ const bh=Math.sqrt(4*Sh),ch=2*Sh/bh,bv=Math.sqrt(2.5*Sv),cv=2*Sv/(bv*(1+.7)),cvt=.7*cv;
+ const q=.5*a.rho*a.cruise*a.cruise;
+ const Cl=W/(q*S);
+ const CDi=lattice.CDiAlpha2*(Cl/lattice.liftSlope)**2;
+ const eVLM=Cl*Cl/(Math.PI*a.ar*CDi);
+ const k=CDi/(Cl*Cl);
+ const CDtotal=a.cd0+CDi; // provisional CD0 allowance, not derived from the selected NACA lift-only data
+ const lift=q*S*Cl,D=q*S*CDtotal,P=D*a.cruise;
+ const cruiseTime=a.endurance-a.climbTime-a.vtolTime,validTime=cruiseTime>=0;
+ const actualCruiseTime=Math.max(0,cruiseTime),range=a.cruise*actualCruiseTime*60/1000;
+ const Vclimb=Math.sqrt(2*(W/S)/a.rho*Math.sqrt(k/(3*a.cd0)));
+ const climbRate=a.climbTime>0?a.climbAltitude/(a.climbTime*60):0;
+ const theta=climbRate<Vclimb?Math.asin(climbRate/Vclimb):NaN;
+ const Vc=Math.max(Vclimb,1.25*vs),gamma=climbRate<Vc?Math.asin(climbRate/Vc):NaN;
+ const clc=Number.isFinite(gamma)?2*W*Math.cos(gamma)/(a.rho*Vc*Vc*S):NaN;
+ const cdc=a.cd0+k*clc*clc,Dc=.5*a.rho*S*Vc*Vc*cdc;
+ const Pc=climbRate*W+Dc*Vc;
+ // Entered electrical power is a user's system estimate. Enforce a drag-based lower bound, plus avionics.
+ const minElecCruise=P/a.propEff+a.auxPower,minElecClimb=Pc/a.propEff+a.auxPower;
+ const elecCruise=Math.max(a.pCruise,minElecCruise),elecClimb=Math.max(a.pClimb,minElecClimb);
+ const elecHover=a.pVTOL*a.vtolMotors+a.auxPower;
+ const Ecr=elecCruise*actualCruiseTime/60,Ecl=a.climbTime>0?elecClimb*a.climbTime/60:0;
+ const Ev=elecHover*a.vtolTime/60;
+ const Et=Ecr+Ecl+Ev,Er=Et/a.usable,capacity=Er/a.voltage*1000;
+ const rangeOK=range>=a.rangeTarget,stallOK=liftStallTarget>=W*(1-1e-8);
+ return {W,Sreq,S,b,cr,ct,mac,vs,sectionCl,wingClmax,ReTargetStall,ReActualStall,liftStallTarget,lattice,localMax,localChord,criticalStrip,alphaEffCruise,alphaGeometric,alpha0,CDi,CDtotal,eVLM,lf,df,arm,armH,armV,Sh,Sv,bh,ch,bv,cv,cvt,Cl,lift,D,P,range,k,Vclimb,Vc,climbRate,theta:gamma,clc,cdc,Dc,Pc,Ecr,Ecl,Ev,Et,Er,capacity,elecCruise,elecClimb,minElecCruise,minElecClimb,cruiseTime,validTime,rangeOK,stallOK,ReCruise,ReStall:ReActualStall,wingLoading:a.mass/S,tailConeLength:df*a.tailConeRatio};
+}
+function drawWing(r,a){
+ const svg=$('wingSVG'),b=Math.max(r.b,1e-6),sc=Math.min(175/b,145/Math.max(r.cr,r.ct));
+ const half=b*sc/2,rc=r.cr*sc,tc=r.ct*sc;
+ const shift=half*Math.tan(a.wingSweep*Math.PI/180),rootX=Math.max(60,Math.min(310,145+a.wingXOffset*sc)),tipX=rootX+shift+.25*(rc-tc);
+ const rootLE=rootX,rootTE=rootX+rc,tipLE=tipX,tipTE=tipX+tc;
+ const poly=[[rootLE,120],[tipLE,120-half],[tipTE,120-half],[rootTE,120],[tipTE,120+half],[tipLE,120+half]];
+ const txt=`Span ${fmt(r.b,3)} m  •  Sweep ${fmt(a.wingSweep,1)}°  •  X offset ${fmt(a.wingXOffset,2)} m`;
+ svg.innerHTML=`<rect width="530" height="240" rx="10" fill="#101e30"/><line x1="15" x2="515" y1="120" y2="120" stroke="#50677c" stroke-dasharray="5 6"/>
+ <polygon points="${poly.map(p=>p.join(',')).join(' ')}" fill="#278d9d" fill-opacity=".72" stroke="#79e5d5" stroke-width="2"/>
+ <polyline points="${rootLE+.25*rc},120 ${tipLE+.25*tc},${120-half}" fill="none" stroke="#f1c27e" stroke-dasharray="5 4" stroke-width="1.8"/>
+ <polyline points="${rootLE+.25*rc},120 ${tipLE+.25*tc},${120+half}" fill="none" stroke="#f1c27e" stroke-dasharray="5 4" stroke-width="1.8"/>
+ <line x1="${rootLE+.25*rc}" x2="${rootLE+.25*rc+a.wingXOffset*sc}" y1="120" y2="120" stroke="#f495ac" stroke-width="3"/>
+ <text x="14" y="22" fill="#c2d6e8" font-size="13">Top view • aft sweep along 25% chord</text>
+ <text x="14" y="218" fill="#abc8dd" font-size="12">${txt}</text>`;
+}
+function drawWingFront(r,a){
+ const svg=$('wingFrontSVG');const sc=410/Math.max(r.b,0.01),cx=265,cy=135,half=r.b*sc/2;
+ const rise=half*Math.tan(a.wingDihedral*Math.PI/180),mountZ=a.wingZOffset;
+ const baseY=cy-Math.max(-40,Math.min(40,mountZ*sc*.6));
+ svg.innerHTML=`<rect width="530" height="240" rx="10" fill="#101e30"/>
+ <line x1="265" y1="25" x2="265" y2="206" stroke="#6b849b" stroke-dasharray="5 5"/>
+ <line x1="28" y1="135" x2="502" y2="135" stroke="#526d80" stroke-dasharray="5 5"/>
+ <path d="M${cx-half} ${baseY-rise} L${cx} ${baseY} L${cx+half} ${baseY-rise}" stroke="#70e3da" stroke-width="6" stroke-linecap="round" fill="none"/>
+ <circle cx="265" cy="135" r="4" fill="#fff"/>
+ <path d="M${cx} 135v${baseY-135}" stroke="#f5ba7c" stroke-width="2" stroke-dasharray="3 3"/>
+ <text x="18" y="22" font-size="13" fill="#c8d9e6">Front view · fuselage centerline datum</text>
+ <text x="18" y="202" font-size="13" fill="#a7c4dd">Dihedral ${fmt(a.wingDihedral,1)}° · Z offset ${fmt(mountZ,2)} m</text>
+ <text x="18" y="222" font-size="12" fill="#9cb6c9">Span ${fmt(r.b,3)} m · tip rise ${fmt(r.b/2*Math.tan(a.wingDihedral*Math.PI/180),3)} m</text>`;
+}
+function drawAirfoil2D(key){
+ const foil=airfoilPolars[key];
+ if(!foil)return;
+ const digits=foil.name.replace(/\D/g,'').slice(-4);
+ const m=Number(digits[0])/100, p=Number(digits[1])/10, t=Number(digits.slice(2))/100;
+ const top=[],bottom=[],camber=[];
+ for(let i=0;i<=100;i++){
+  const theta=Math.PI*i/100, x=(1-Math.cos(theta))/2;
+  const yt=5*t*(.2969*Math.sqrt(x)-.126*x-.3516*x*x+.2843*x*x*x-.1036*x*x*x*x);
+  let yc=0,dyc=0;
+  if(m>0&&p>0){
+   if(x<p){yc=m/(p*p)*(2*p*x-x*x);dyc=2*m/(p*p)*(p-x)}
+   else{yc=m/((1-p)*(1-p))*((1-2*p)+2*p*x-x*x);dyc=2*m/((1-p)*(1-p))*(p-x)}
+  }
+  const ang=Math.atan(dyc);
+  const xu=x-yt*Math.sin(ang),yu=yc+yt*Math.cos(ang);
+  const xl=x+yt*Math.sin(ang),yl=yc-yt*Math.cos(ang);
+  const sx=v=>39+520*v,sy=v=>100-550*v;
+  top.push(`${sx(xu).toFixed(2)},${sy(yu).toFixed(2)}`);
+  bottom.push(`${sx(xl).toFixed(2)},${sy(yl).toFixed(2)}`);
+  camber.push(`${sx(x).toFixed(2)},${sy(yc).toFixed(2)}`);
+ }
+ const svg=$('airfoilProfile');
+ if(!svg)return;
+ svg.innerHTML=`<rect width="600" height="185" rx="9" fill="#101e30"/>
+ <path d="M39 100H560" stroke="#476178" stroke-width="1" stroke-dasharray="5 6"/>
+ <path d="M${top.join(' L')} L${bottom.reverse().join(' L')}Z" fill="#1e687b" fill-opacity=".65" stroke="#70e3da" stroke-width="2.4" stroke-linejoin="round"/>
+ <path d="M${camber.join(' L')}" fill="none" stroke="#f6be77" stroke-dasharray="5 4" stroke-width="1.6"/>
+ <text x="39" y="161" fill="#9cb9cd" font-size="12">Leading edge</text><text x="560" y="161" text-anchor="end" fill="#9cb9cd" font-size="12">Trailing edge</text>`;
+ $('airfoilProfileName').textContent=foil.name;
+}
+function drawFuselage(r,a){
+ const svg=$('fuselageSVG');
+ const L=Math.max(r.lf,1e-5),D=Math.max(r.df,1e-5),cone=Math.min(Math.max(r.tailConeLength,0),L*.75);
+ const left=42,right=488,cx=114,cy=121,px=(right-left)/L;
+ const h=Math.min(77,D*px/2),x0=left,x1=left+L*px;
+ const noseL=Math.min(L*.23,Math.max(D*.9,L*.12)),noseX=x0+noseL*px;
+ const coneX=Math.max(noseX+12,x1-cone*px);
+ const dy=Math.max(3,h*.10);
+ const outline=`M ${x0} ${cy} Q ${x0+noseL*px*.35} ${cy-h} ${noseX} ${cy-h} L ${coneX} ${cy-h} Q ${x1-8} ${cy-h*.35} ${x1} ${cy-dy} L ${x1} ${cy+dy} Q ${x1-8} ${cy+h*.35} ${coneX} ${cy+h} L ${noseX} ${cy+h} Q ${x0+noseL*px*.35} ${cy+h} ${x0} ${cy} Z`;
+ const armX=Math.min(x1,Math.max(x0,x1-r.arm*px));
+ svg.innerHTML=`<rect width="530" height="240" rx="10" fill="#101e30"/>
+ <path d="${outline}" fill="#2f9ea6" fill-opacity=".7" stroke="#75e7d7" stroke-width="2"/>
+ <line x1="${x0}" y1="${cy}" x2="${x1}" y2="${cy}" stroke="#aac3d6" stroke-dasharray="5 5" opacity=".6"/>
+ <line x1="${x0}" y1="191" x2="${x1}" y2="191" stroke="#e9c583" stroke-width="1.5"/>
+ <path d="M${x0} 186v10 M${x1} 186v10" stroke="#e9c583" stroke-width="1.5"/>
+ <text x="265" y="210" fill="#e9c583" font-size="13" text-anchor="middle">Fuselage L = ${fmt(L,3)} m</text>
+ <line x1="${noseX+20}" y1="${cy-h}" x2="${noseX+20}" y2="${cy+h}" stroke="#8fbaff" stroke-width="1.5"/>
+ <path d="M${noseX+15} ${cy-h}h10 M${noseX+15} ${cy+h}h10" stroke="#8fbaff" stroke-width="1.5"/>
+ <text x="${noseX+32}" y="${cy-h-9}" fill="#bcd7ff" font-size="12">D = ${fmt(D,3)} m</text>
+ <line x1="${coneX}" y1="${cy+h+12}" x2="${x1}" y2="${cy+h+12}" stroke="#f3b880" stroke-dasharray="4 4"/>
+ <text x="${Math.max(380,coneX)}" y="${cy+h+28}" fill="#f3b880" font-size="11" text-anchor="middle">Tail cone ${fmt(cone,3)} m</text>
+ <line x1="${armX}" y1="${cy-7}" x2="${armX}" y2="${cy+7}" stroke="#fff" stroke-width="2"/>
+ <line x1="${Math.max(x0,Math.min(x1,x0+(.35*L+a.wingXOffset)*px))}" y1="${cy-65}" x2="${Math.max(x0,Math.min(x1,x0+(.35*L+a.wingXOffset)*px))}" y2="${cy+75}" stroke="#6fe4d6" stroke-dasharray="4 4"/>
+ <line x1="${Math.max(x0,Math.min(x1,x0+(.35*L+r.arm+a.htXOffset)*px))}" y1="${cy-65}" x2="${Math.max(x0,Math.min(x1,x0+(.35*L+r.arm+a.htXOffset)*px))}" y2="${cy+75}" stroke="#f3ba75" stroke-dasharray="4 4"/>
+ <text x="15" y="23" fill="#a2b5c7" font-size="13">SIDE VIEW • mounting stations: teal wing, amber tail</text>`;
+}
+function drawTail(r,a){
+ const svg=$('tailSVG'); const bh=Math.max(r.bh,1e-6),bv=Math.max(r.bv,1e-6);
+ const Hsc=Math.min(155/bh,84/Math.max(r.ch,1e-6)),hhalf=bh*Hsc/2,hc=r.ch*Hsc;
+ const hx=104+Math.max(-30,Math.min(30,a.htXOffset*Hsc)),hy=112,htipX=hx+hhalf*Math.tan(a.htSweep*Math.PI/180);
+ const hpoly=[[hx,hy],[htipX,hy-hhalf],[htipX+hc,hy-hhalf],[hx+hc,hy],[htipX+hc,hy+hhalf],[htipX,hy+hhalf]];
+ const fsc=Math.min(88/bv,130/Math.max(r.cv,1e-6));const fh=bv*fsc,fc=r.cv*fsc,ft=r.cvt*fsc;
+ const fx=365+Math.max(-30,Math.min(30,a.vtXOffset*fsc)),fy=157,ftipX=fx+fh*Math.tan(a.vtSweep*Math.PI/180);
+ svg.innerHTML=`<rect width="530" height="240" rx="10" fill="#101e30"/>
+ <text x="128" y="26" fill="#c9ddeb" text-anchor="middle" font-size="13">Horizontal tail • top</text>
+ <text x="396" y="26" fill="#c9ddeb" text-anchor="middle" font-size="13">Vertical fin • side</text>
+ <line x1="264" y1="30" x2="264" y2="204" stroke="#456074" stroke-dasharray="5 5"/>
+ <polygon points="${hpoly.map(p=>p.join(',')).join(' ')}" fill="#288d9b" fill-opacity=".7" stroke="#70e3da" stroke-width="2"/>
+ <line x1="${hx+.25*hc}" y1="${hy}" x2="${htipX+.25*hc}" y2="${hy-hhalf}" stroke="#f4c184" stroke-dasharray="4 4"/>
+ <polygon points="${fx},${fy} ${fx+fc},${fy} ${ftipX+ft},${fy-fh} ${ftipX},${fy-fh}" fill="#288d9b" fill-opacity=".7" stroke="#70e3da" stroke-width="2"/>
+ <text x="128" y="199" text-anchor="middle" font-size="12" fill="#a5c4d8">HT sweep ${fmt(a.htSweep,1)}°</text>
+ <text x="128" y="218" text-anchor="middle" font-size="12" fill="#a5c4d8">HT span ${fmt(r.bh,3)} m</text>
+ <text x="395" y="199" text-anchor="middle" font-size="12" fill="#a5c4d8">Fin sweep ${fmt(a.vtSweep,1)}°</text>
+ <text x="395" y="218" text-anchor="middle" font-size="12" fill="#a5c4d8">Fin height ${fmt(r.bv,3)} m</text>`;
+ drawTailFront(r,a);
+}
+function drawTailFront(r,a){
+ const svg=$('tailFrontSVG'),sc=Math.min(310/Math.max(r.bh,1e-6),95/Math.max(r.bv,1e-6));
+ const cx=265,fy=150,hy=fy-Math.max(-45,Math.min(45,a.htZOffset*sc));
+ const hhalf=r.bh*sc/2,hup=hhalf*Math.tan(a.htDihedral*Math.PI/180);
+ const finZ=fy-Math.max(-45,Math.min(45,a.vtZOffset*sc)),finHeight=r.bv*sc;
+ const finTipX=cx+finHeight*Math.tan(a.vtCant*Math.PI/180);
+ svg.innerHTML=`<rect width="530" height="240" rx="10" fill="#101e30"/>
+ <line x1="265" y1="25" x2="265" y2="190" stroke="#47627c" stroke-dasharray="5 5"/>
+ <line x1="25" y1="150" x2="505" y2="150" stroke="#47627c" stroke-dasharray="5 5"/>
+ <path d="M${cx-hhalf} ${hy-hup} L${cx} ${hy} L${cx+hhalf} ${hy-hup}" fill="none" stroke="#70e3da" stroke-width="6" stroke-linecap="round"/>
+ <path d="M${cx} ${finZ}L${finTipX} ${finZ-finHeight}" fill="none" stroke="#f5c17e" stroke-width="8" stroke-linecap="round"/>
+ <circle cx="265" cy="150" r="4" fill="#fff"/>
+ <text x="16" y="21" font-size="13" fill="#c6d8e8">Tail front view · horizontal tail + fin</text>
+ <text x="16" y="203" font-size="12" fill="#9fbdd3">HT dihedral ${fmt(a.htDihedral,1)}° · HT Z ${fmt(a.htZOffset,2)} m</text>
+ <text x="16" y="223" font-size="12" fill="#9fbdd3">Fin cant ${fmt(a.vtCant,1)}° · Fin Z ${fmt(a.vtZOffset,2)} m</text>`;
+}
+function drawPower(a,r){const width=750,height=245, pad={l:52,r:18,t:14,b:40};let d=[];const vmin=Math.max(1,a.cruise*.45),vmax=a.cruise*1.65;for(let i=0;i<65;i++){let v=vmin+(vmax-vmin)*i/64;{const q=.5*a.rho*v*v,cl=2*r.W/(a.rho*v*v*r.S),cd=a.cd0+r.k*cl*cl;d.push([v,q*r.S*cd*v])}}let maxY=Math.max(...d.map(x=>x[1]))*1.1;let x=v=>pad.l+(v-vmin)/(vmax-vmin)*(width-pad.l-pad.r),y=v=>height-pad.b-v/maxY*(height-pad.t-pad.b);let lines='';for(let j=0;j<=4;j++){let yy=pad.t+j*(height-pad.t-pad.b)/4;lines+=`<line x1="${pad.l}" y1="${yy}" x2="${width-pad.r}" y2="${yy}" stroke="#314259" stroke-dasharray="4 5"/><text x="${pad.l-8}" y="${yy+4}" text-anchor="end" font-size="11" fill="#93a9ba">${fmt(maxY*(1-j/4),0)}</text>`}let path=d.map(([v,p],i)=>(i?'L':'M')+x(v).toFixed(1)+','+y(p).toFixed(1)).join(' ');$('powerChart').innerHTML=lines+`<path d="${path}" stroke="#56daca" stroke-width="3" fill="none"/><line x1="${x(a.cruise)}" y1="${pad.t}" x2="${x(a.cruise)}" y2="${height-pad.b}" stroke="#edb56b" stroke-dasharray="5 5"/><circle cx="${x(a.cruise)}" cy="${y(r.P)}" r="5" fill="#edb56b"/><text x="${x(a.cruise)+9}" y="${Math.max(22,y(r.P)-11)}" fill="#f6cb94" font-size="13">${fmt(r.P,0)} W</text><text x="${width/2}" y="${height-8}" fill="#a6b8c9" text-anchor="middle" font-size="12">Cruise speed (m/s)   •   current ${fmt(a.cruise,1)}</text><text x="14" y="15" fill="#a6b8c9" font-size="12">W</text>`}
+function drawEnergy(r){let entries=[['Cruise',r.Ecr,'#54dbc8'],['Climb',r.Ecl,'#7bb8fc'],['VTOL',r.Ev,'#f5b96f']];const max=Math.max(...entries.map(x=>x[1]),.01);$('energyChart').innerHTML=entries.map(([name,val,color],i)=>{const y=22+70*i;return `<text x="10" y="${y+13}" fill="#c8d7e6" font-size="15">${name}</text><rect x="105" y="${y}" width="265" height="20" rx="5" fill="#26384a"/><rect x="105" y="${y}" width="${265*val/max}" height="20" rx="5" fill="${color}"/><text x="380" y="${y+15}" fill="#e6f3fb" font-size="13">${fmt(val,1)} Wh</text>`}).join('')}
+function show(a,r){
+ const nm=(id,s)=>$(id).textContent=s;
+ nm('mTarget',fmt(a.rangeTarget,1)+' km');nm('mDistance',fmt(r.range,1)+' km');nm('mCruiseTime',fmt(Math.max(r.cruiseTime,0),1)+' min');nm('mPayload',fmt(100*a.payload/a.mass,0)+'%');
+ const warnings=[];
+ if(!r.validTime)warnings.push('Climb + VTOL durations exceed specified mission endurance.');
+ if(!r.rangeOK)warnings.push('Estimated cruise distance does not meet the target range (wind and climb distance excluded).');
+ if(!r.stallOK)warnings.push('Calculated wing stall-lift check did not converge to weight; review inputs and polar assumptions.');
+ if(r.ReTargetStall<polarRe[0])warnings.push('Airfoil stall Reynolds number below the 200k database limit: holding the 200k section Clmax is optimistic; obtain low-Re polar data.');
+ if(r.ReTargetStall>polarRe[2])warnings.push('Airfoil stall Reynolds number above the 5M database limit: using the last available section polar value.');
+
+ if(a.cruise<=a.stall)warnings.push('Cruise speed must exceed stall speed for level-flight design.');
+ if(r.arm+a.htXOffset-a.wingXOffset<=.05||r.arm+a.vtXOffset-a.wingXOffset<=.05)warnings.push('Tail station offsets produce a very small effective tail arm; check placement.');
+ if(a.ar>14||a.ar<3)warnings.push('The coarse VLM2 grid has limited validation at extreme aspect ratios.');
+ if(Math.abs(a.wingDihedral)>0.01)warnings.push('Dihedral is modeled in vortex-ring geometry; induced drag uses a planar Fourier approximation and needs validation.');
+ if(a.payload>a.mass)warnings.push('Payload mass exceeds total MTOW.');
+ if(a.cruise<=r.vs*1.2)warnings.push('Cruise speed is below 1.2 × calculated stall speed; review flight-speed margin.');
+ if(a.vtolTime>0 && a.vtolMotors===0)warnings.push('VTOL time is entered but VTOL motor count is zero.');
+ if(a.vtolTime>0 && a.pVTOL===0)warnings.push('VTOL hover motor power is zero: energy is underestimated.');
+ if(a.climbAltitude>0&&a.climbTime===0)warnings.push('Climb altitude specified but climb time is zero.');
+ if(a.pCruise<r.minElecCruise)warnings.push('Entered cruise electrical power is below the drag/efficiency estimate; model uses the higher value.');
+ if(a.climbTime>0&&a.pClimb<r.minElecClimb)warnings.push('Entered climb electrical power is below the estimated minimum; model uses the higher value.');
+ $('missionAlerts').className='notice'+(!warnings.length?' success':'');
+ $('missionAlerts').innerHTML=warnings.length?'<strong>Mission/design checks</strong><ul>'+warnings.map(x=>'<li>'+x+'</li>').join('')+'</ul>':'<strong>Mission checks:</strong> no conflicts detected in the simplified model.';
+ $('checks').className='notice'+(r.stallOK?' success':'');
+ $('checks').textContent=r.stallOK?'Required wing area satisfies the assumed stall-lift sizing condition.':'Stall-lift consistency check needs review.';
+ nm('kSpan',fmt(r.b)+' m');nm('kArea',fmt(r.S)+' m²');nm('kPower',fmt(r.P,1)+' W');nm('kRange',fmt(r.range,1)+' km');
+ nm('eEnergy',fmt(r.Et,1)+' Wh');nm('eCap',fmt(r.capacity,0)+' mAh');nm('eRated',fmt(r.Er,1)+' Wh');nm('eMargin',fmt(1/a.usable,2)+'×');
+ $('missionResults').innerHTML=row('Design altitude (ISA)',fmt(a.altitude,0)+' m')+row('ISA air density',fmt(a.rho,4)+' kg/m³')+row('Mission MTOW',fmt(a.mass)+' kg')+row('Payload',fmt(a.payload)+' kg')+row('Required range',fmt(a.rangeTarget)+' km')+row('Available cruise time',fmt(Math.max(0,r.cruiseTime),1)+' min')+row('Calculated wing area',fmt(r.Sreq,3)+' m²')+row('Calculated wingspan',fmt(r.b,2)+' m')+row('Modeled cruise air distance',fmt(r.range,1)+' km')+row('Required battery rated capacity',fmt(r.capacity,0)+' mAh',true);
+ $('overviewResults').innerHTML=row('MTOW',fmt(a.mass)+' kg')+row('Required wing area',fmt(r.Sreq,3)+' m²')+row('Wing loading',fmt(r.wingLoading)+' kg/m²')+row('Implied stall speed',fmt(r.vs,2)+' m/s')+row('Mission endurance',fmt(a.endurance,0)+' min')+row('Cruise-only time',fmt(Math.max(0,r.cruiseTime),1)+' min')+row('Cruise drag',fmt(r.D,2)+' N')+row('Cruise-only distance, still air',fmt(r.range,1)+' km',true);
+ drawWing(r,a);drawWingFront(r,a);drawAirfoil2D(a.airfoil);drawFuselage(r,a);drawTail(r,a);drawPower(a,r);
+ $('wingResults').innerHTML=row('Selected 2D airfoil',airfoilPolars[a.airfoil].name)+row('Airfoil 2D cₗ,max at stall',fmt(r.sectionCl,3))+row('Stall Reynolds number (MAC)',fmt(r.ReTargetStall,0))+row('Cruise Reynolds number (MAC)',fmt(r.ReCruise,0))+row('Estimated whole-wing CLmax',fmt(r.wingClmax,3),true)+row('Area needed for target stall',fmt(r.Sreq,3)+' m²',true)+row('Auto-sized wing area',fmt(r.S,3)+' m²')+row('Wingspan',fmt(r.b,3)+' m')+row('Aspect ratio',fmt(a.ar,2))+row('Wing quarter-chord sweep',fmt(a.wingSweep,1)+'°')+row('Wing dihedral',fmt(a.wingDihedral,1)+'°')+row('Wing X / Z offset',fmt(a.wingXOffset,2)+' / '+fmt(a.wingZOffset,2)+' m')+row('Root chord',fmt(r.cr,3)+' m')+row('Tip chord',fmt(r.ct,3)+' m')+row('Mean aerodynamic chord',fmt(r.mac,3)+' m')+row('25% MAC reference',fmt(.25*r.mac,3)+' m (from MAC LE)')+row('35% MAC reference',fmt(.35*r.mac,3)+' m (from MAC LE)');
+ $('tailResults').innerHTML=row('Fuselage length',fmt(r.lf,3)+' m')+row('Equivalent fuselage diameter',fmt(r.df,3)+' m')+row('Tail-cone length (estimate)',fmt(r.tailConeLength,3)+' m')+row('Tail-cone half-angle input',fmt(a.tailConeAngle,1)+'°')+row('Nominal tail moment arm',fmt(r.arm,3)+' m')+row('HT effective arm',fmt(r.armH,3)+' m')+row('Fin effective arm',fmt(r.armV,3)+' m')+row('Horizontal tail area',fmt(r.Sh,3)+' m²',true)+row('Horizontal tail span',fmt(r.bh,3)+' m')+row('Horizontal tail chord',fmt(r.ch,3)+' m')+row('HT sweep / dihedral',fmt(a.htSweep,1)+'° / '+fmt(a.htDihedral,1)+'°')+row('HT X / Z offset',fmt(a.htXOffset,2)+' / '+fmt(a.htZOffset,2)+' m')+row('Vertical tail area',fmt(r.Sv,3)+' m²',true)+row('Vertical tail span',fmt(r.bv,3)+' m')+row('Vertical root chord',fmt(r.cv,3)+' m')+row('Fin sweep / cant',fmt(a.vtSweep,1)+'° / '+fmt(a.vtCant,1)+'°')+row('Fin X / Z offset',fmt(a.vtXOffset,2)+' / '+fmt(a.vtZOffset,2)+' m');
+ nm('fuseRatioNow',fmt(a.fuseRatio));nm('slenderNow',fmt(a.fuseSlender));nm('coneNow',fmt(a.tailConeRatio));nm('angleNow',fmt(a.tailConeAngle,1)+'°');
+ const surfaceDefs=[
+  {name:'Aileron',root:'ail',parentArea:r.S,parentSpan:r.b,parentChord:r.mac},
+  {name:'Elevator',root:'ele',parentArea:r.Sh,parentSpan:r.bh,parentChord:r.ch},
+  {name:'Rudder',root:'rud',parentArea:r.Sv,parentSpan:r.bv,parentChord:r.cv}
+ ];
+ $('controlResults').innerHTML='<div class="control-surface-results">'+surfaceDefs.map(s=>{
+  const q=s.root,area=s.parentArea*a[q+'Area'],span=s.parentSpan*a[q+'Span'],chord=s.parentChord*a[q+'Chord'];
+  const projected=span*chord,ratio=area>0?projected/area:0;
+  const note=(ratio<0.8||ratio>1.2)?'<p class="control-check">Area ratio and span × chord imply different sizes; review the ratios and actual planform.</p>':'';
+  return '<div class="control-surface-result"><h4>'+s.name+'</h4><div class="control-readouts">'+row('Surface area allowance',fmt(area,4)+' m²')+row('Total span allowance',fmt(span,3)+' m')+row('Representative chord',fmt(chord,3)+' m')+row('Deflection limits','−'+fmt(a[q+'Neg'],0)+'° / +'+fmt(a[q+'Pos'],0)+'°')+'</div>'+note+'</div>';
+ }).join('')+'</div>';
+ $('cruiseResults').innerHTML=row('Design altitude',fmt(a.altitude,0)+' m')+row('Air density (ISA)',fmt(a.rho,4)+' kg/m³')+row('Weight',fmt(r.W,1)+' N')+row('Required CL in level cruise',fmt(r.Cl,3))+row('Estimated total cruise drag',fmt(r.D,2)+' N')+row('Aerodynamic propulsive power',fmt(r.P,1)+' W',true)+row('Estimated electrical input floor',fmt(r.minElecCruise,1)+' W')+row('Electrical power used',fmt(r.elecCruise,1)+' W')+row('Cruise-only range (still air)',fmt(r.range,1)+' km');
+ $('climbResults').innerHTML=row('Induced drag factor k',fmt(r.k,4))+row('Reference level-flight min-power speed',fmt(r.Vclimb,2)+' m/s')+row('Climb analysis speed (≥1.25 Vs)',fmt(r.Vc,2)+' m/s')+row('Required climb rate',fmt(r.climbRate,2)+' m/s')+row('Path angle (if feasible)',fmt(r.theta*180/Math.PI,2)+'°')+row('Estimated climb drag',fmt(r.Dc,2)+' N')+row('Aerodynamic/mechanical climb power',fmt(r.Pc,1)+' W')+row('Electrical power used',fmt(r.elecClimb,1)+' W',true);
+ $('reResults').innerHTML=row('Atmosphere model', 'ISA / standard-day')+row('Altitude',fmt(a.altitude,0)+' m')+row('Temperature',fmt(a.atmosphereTempC,2)+' °C')+row('Pressure',fmt(a.atmospherePressurePa/1000,2)+' kPa')+row('Air density',fmt(a.rho,4)+' kg/m³')+row('Kinematic viscosity (calculated)',a.kinVisc.toExponential(4)+' m²/s')+row('Cruise Reynolds number',fmt(r.ReCruise,0))+row('Target-stall Reynolds number',fmt(r.ReTargetStall,0))+row('Actual-stall Reynolds number',fmt(r.ReStall,0));
+ const positions=r.lattice.localSlope.map((_,i)=>(i+.5)/r.lattice.localSlope.length);
+ const clCruiseLocal=r.lattice.localSlope.map(s=>s*r.alphaEffCruise);
+ const maxY=Math.max(...clCruiseLocal,...r.localMax,0.1)*1.17;
+ const X=v=>40+v*438,Y=v=>195-v/maxY*155;
+ let chart='<line x1="40" y1="195" x2="485" y2="195" stroke="#526a7b"/><line x1="40" y1="20" x2="40" y2="195" stroke="#526a7b"/>';
+ chart+='<text x="255" y="226" text-anchor="middle" font-size="12" fill="#c0d3df">Span (left tip → right tip)</text>';
+ chart+='<text x="42" y="16" font-size="11" fill="#aabeca">local cₗ</text>';
+ for(let k=0;k<=3;k++){const v=maxY*k/3;chart+='<line x1="40" y1="'+Y(v)+'" x2="485" y2="'+Y(v)+'" stroke="#28384a"/><text x="35" y="'+(Y(v)+4)+'" text-anchor="end" font-size="11" fill="#aabeca">'+fmt(v,2)+'</text>'}
+ for(let [arr,color,dash] of [[clCruiseLocal,'#54d8d1',''],[r.localMax,'#edb36d','6 5']]){
+  chart+='<polyline points="'+arr.map((v,i)=>X(positions[i]).toFixed(1)+','+Y(v).toFixed(1)).join(' ')+'" fill="none" stroke="'+color+'" stroke-width="2.5" '+(dash?'stroke-dasharray="'+dash+'"':'')+'/>';
+ }
+ $('vlmSpanChart').innerHTML=chart;
+ $('vlmResults').innerHTML=row('Method','VLM2 ring lattice · 3 chord × 18 span')+row('Lift slope dC_L/dα',fmt(r.lattice.liftSlope,3)+' /rad')+row('Required cruise C_L',fmt(r.Cl,3))+row('Estimated geometric incidence',fmt(r.alphaGeometric,2)+'° (approx.)')+row('Calculated whole-wing lift',fmt(r.lift,2)+' N')+row('Induced drag coefficient C_Di',fmt(r.CDi,5))+row('Induced drag force',fmt(.5*a.rho*a.cruise*a.cruise*r.S*r.CDi,3)+' N')+row('Provisional profile + parasite C_D0 (not from airfoil polars)',fmt(a.cd0,4))+row('Total estimated wing/aircraft drag',fmt(r.D,2)+' N',true)+row('Span efficiency from circulation harmonics',fmt(r.eVLM,3))+row('First estimated stall strip',String(r.criticalStrip+1)+' / 18')+row('Stall-limited C_L,max',fmt(r.wingClmax,3),true);
+ $('airfoilDataRows').innerHTML=Object.entries(airfoilPolars).map(([key,v])=>'<tr'+(a.airfoil===key?' style="background:#164044"':'')+'><td><a href="'+v.url+'" target="_blank" rel="noopener noreferrer">'+v.name+'</a></td>'+v.clmax.map(val=>'<td>'+fmt(val,2)+'</td>').join('')+'</tr>').join('');
+ $('airfoilResults').innerHTML=row('Selected section',airfoilPolars[a.airfoil].name)+row('MAC used as reference chord',fmt(r.mac,4)+' m')+row('Re at cruise speed',fmt(r.ReCruise,0))+row('Re at TARGET stall speed',fmt(r.ReTargetStall,0))+row('2D airfoil section cₗ,max at target stall Re',fmt(r.sectionCl,3))+row('VLM2 estimate from 2D stall limits','3 × 18 vortex rings')+row('VLM2 stall-limited whole-wing C_L,max',fmt(r.wingClmax,3),true)+row('Required wing area from target stall',fmt(r.Sreq,4)+' m²',true)+row('Auto-sized wing area',fmt(r.S,4)+' m²')+row('Available lift at target stall speed',fmt(r.liftStallTarget,2)+' N')+row('Aircraft weight',fmt(r.W,2)+' N')+row('Implied actual stall speed',fmt(r.vs,2)+' m/s')+row('Cruise C_L required for L = W',fmt(r.Cl,3))+row('Calculated level-cruise lift',fmt(r.lift,2)+' N',true);
+ $('energyResults').innerHTML=row('Cruise time',fmt(Math.max(r.cruiseTime,0),1)+' min')+row('Cruise electrical power',fmt(r.elecCruise,1)+' W')+row('Cruise energy',fmt(r.Ecr,1)+' Wh')+row('Climb electrical power',fmt(r.elecClimb,1)+' W')+row('Climb energy',fmt(r.Ecl,1)+' Wh')+row('VTOL power (all lift motors + auxiliaries)',fmt(a.pVTOL*a.vtolMotors+a.auxPower,1)+' W')+row('VTOL energy',fmt(r.Ev,1)+' Wh')+row('Total modeled mission energy',fmt(r.Et,1)+' Wh',true)+row('Usable battery fraction',fmt(a.usable*100,0)+'%')+row('Rated energy needed',fmt(r.Er,1)+' Wh')+row('Required nominal capacity',fmt(r.capacity,0)+' mAh',true);
+ const currentCruise=r.elecCruise/a.voltage,currentClimb=r.elecClimb/a.voltage;
+ const hoverThrust=a.vtolMotors>0?1.5*r.W/(a.vtolMotors*9.81):0;
+ $('partGuidance').innerHTML=row('Cruise thrust required (≥ drag)',fmt(r.D,2)+' N')+row('Climb thrust / power',fmt(r.Pc,1)+' W estimated propulsive power')+row('Battery current in cruise (nominal)',fmt(currentCruise,1)+' A')+row('Battery current in climb (nominal)',fmt(currentClimb,1)+' A')+row('Battery nominal voltage',fmt(a.voltage,1)+' V')+row('Calculated battery capacity',fmt(r.capacity,0)+' mAh')+(a.vtolMotors>0?row('Suggested static lift-thrust check per motor (1.5 × weight)',fmt(hoverThrust,2)+' kgf'):row('VTOL motors','Not selected'));
+ drawEnergy(r);return r;
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function aliSearch(name){return 'https://www.aliexpress.com/w/wholesale-'+encodeURIComponent(name.trim().toLowerCase()).replace(/%20/g,'-')+'.html'}
+function safeUrl(url){try{const u=new URL(url);return ['https:','http:'].includes(u.protocol)?u.href:''}catch(e){return ''}}
+function calcBom(){let mass=0,cost=0;for(const b of bom){mass+=b.qty*b.mass;cost+=b.qty*b.price}const gap=Number($('mass').value)-mass/1000;$('bCost').textContent=fmt(cost,2);$('bMass').textContent=fmt(mass/1000,2)+' kg';$('bLines').textContent=bom.length;$('bGap').textContent=fmt(gap,2)+' kg';$('bTotalMass').textContent=fmt(mass,1);$('bTotalCost').textContent=fmt(cost,2)}
+function renderBom(){ $('bomRows').innerHTML=bom.map((b,i)=>`<tr><td><input class="bom-name" type="text" aria-label="Component name ${i+1}" data-i="${i}" data-prop="name" value="${esc(b.name)}"><input class="bom-name" style="margin-top:4px;font-size:.72rem" type="url" placeholder="Optional verified product URL" aria-label="Product URL ${i+1}" data-i="${i}" data-prop="url" value="${esc(b.url||'')}"></td><td><input type="number" min="0" step="1" data-i="${i}" data-prop="qty" value="${b.qty}"></td><td><input type="number" min="0" step="0.1" data-i="${i}" data-prop="mass" value="${b.mass}"></td><td><input type="number" min="0" step=".01" data-i="${i}" data-prop="price" value="${b.price}"></td><td class="num" id="bm${i}">${fmt(b.qty*b.mass,1)}</td><td class="num" id="bc${i}">${fmt(b.qty*b.price,2)}</td><td><a class="bom-search" href="${esc(safeUrl(b.url)||aliSearch(b.name))}" target="_blank" rel="noopener noreferrer">${safeUrl(b.url)?'Listing ↗':'Search ↗'}</a></td><td><button class="btn bom-remove" data-remove="${i}" title="Remove component" type="button">×</button></td></tr>`).join('');calcBom()}
+function validate(a){const signed=new Set(['wingSweep','wingDihedral','wingXOffset','wingZOffset','htSweep','htDihedral','htXOffset','htZOffset','vtSweep','vtXOffset','vtZOffset']);return Object.entries(a).every(([key,v])=>key==='airfoil'||key==='atmosphereTempC'||(Number.isFinite(v)&&(v>=0||signed.has(key)))) && a.mass>0&&a.stall>0&&a.cruise>0&&a.rho>0&&a.ar>0&&a.taper>0&&a.fuseSlender>0&&a.fuseRatio>0&&a.tailArmRatio>0&&a.cd0>0&&a.voltage>0&&a.usable>0&&a.usable<=1&&a.propEff>0&&a.propEff<=1&&a.kinVisc>0&&a.payload<=a.mass&&a.tailConeAngle<=40&&a.altitude<=20000&&Math.abs(a.wingSweep)<=45&&Math.abs(a.wingDihedral)<=20&&Math.abs(a.htSweep)<=45&&Math.abs(a.htDihedral)<=20&&Math.abs(a.vtSweep)<=55&&a.vtCant<=25&&['ail','ele','rud'].every(k=>a[k+'Area']>0&&a[k+'Area']<=1&&a[k+'Span']>0&&a[k+'Span']<=1&&a[k+'Chord']>0&&a[k+'Chord']<=1&&a[k+'Neg']<=90&&a[k+'Pos']<=90)}
+function update(){let a=inputs();if(!validate(a)){$('checks').className='notice';$('checks').textContent='Invalid inputs: check positive values, payload ≤ MTOW, altitude 0–20,000 m, propulsion efficiency and usable fraction (0–1).';$('missionAlerts').textContent='Fix invalid mission/design inputs in the sidebar.';return}show(a,compute(a));calcBom()}
+for(let [k,v] of Object.entries(baseline)){$(k).value=v;$(k).addEventListener('input',update)}$('airfoil').value='naca2412';$('airfoil').addEventListener('change',update);renderBom();update();
+$('bomRows').addEventListener('input',e=>{const el=e.target;if(!el.dataset.prop)return;const i=Number(el.dataset.i);if(el.dataset.prop==='name'||el.dataset.prop==='url'){bom[i][el.dataset.prop]=el.value; if(el.dataset.prop==='name'||el.dataset.prop==='url') {const anchor=el.closest('tr').querySelector('.bom-search');anchor.href=safeUrl(bom[i].url)||aliSearch(bom[i].name);anchor.textContent=safeUrl(bom[i].url)?'Listing ↗':'Search ↗'}return}let v=Number(el.value);if(!Number.isFinite(v)||v<0)return;bom[i][el.dataset.prop]=v;$('bm'+i).textContent=fmt(bom[i].qty*bom[i].mass,1);$('bc'+i).textContent=fmt(bom[i].qty*bom[i].price,2);calcBom()});
+$('addPartsTemplate').addEventListener('click',()=>{bom.push(...['Brushless motor','Electronic speed controller ESC','Propeller','LiPo battery','Flight controller','GPS receiver','Servo','Radio receiver'].map(name=>({name,qty:1,mass:0,price:0,url:''})));renderBom()});
+document.querySelectorAll('[data-tailpreset]').forEach(btn=>btn.addEventListener('click',()=>{$('vh').value=btn.dataset.tailpreset;update()}));
+$('addPartBtn').addEventListener('click',()=>{bom.push({name:'New component',qty:1,mass:0,price:0,url:''});renderBom()});
+$('bomRows').addEventListener('click',e=>{const b=e.target.closest('[data-remove]');if(!b)return;bom.splice(Number(b.dataset.remove),1);renderBom()});
+for(let b of document.querySelectorAll('.tab'))b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.pane').forEach(p=>p.classList.toggle('active',p.id==='pane-'+b.dataset.pane))});
+function setPreset(which){const chosen=presets[which]||presets.fixed;for(let [k,v] of Object.entries(chosen))$(k).value=v; $('airfoil').value='naca2412';bom=[];renderBom();update()}
+$('preset').addEventListener('change',e=>{setPreset(e.target.value)});
+$('resetBtn').addEventListener('click',()=>{$('projectName').value='Untitled UAV';setPreset($('preset').value)});
+$('loadBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(!data.inputs||typeof data.inputs!=='object')throw Error('Missing design inputs');for(const k of Object.keys(baseline)){if(Object.hasOwn(data.inputs,k)&&Number.isFinite(Number(data.inputs[k])))$(k).value=data.inputs[k]}if(typeof data.inputs.airfoil==='string' && airfoilPolars[data.inputs.airfoil])$('airfoil').value=data.inputs.airfoil;if(typeof data.projectName==='string')$('projectName').value=data.projectName.slice(0,100);if(Array.isArray(data.bom)){bom=data.bom.slice(0,200).filter(x=>x&&typeof x==='object').map(x=>({name:String(x.name||'Component').slice(0,120),qty:Math.max(0,Number(x.qty)||0),mass:Math.max(0,Number(x.mass)||0),price:Math.max(0,Number(x.price)||0),url:safeUrl(String(x.url||''))}));renderBom()}update();}catch(err){alert('Could not open project: '+err.message)}e.target.value=''});
+$('printBtn').addEventListener('click',()=>window.print());
+$('downloadBtn').addEventListener('click',()=>{const a=inputs(),r=compute(a);const output={app:'General UAV Design Calculator',projectName:$('projectName').value.trim()||'Untitled UAV',configuration:$('preset').value,version:15,disclaimer:'Preliminary sizing only; not validated for flight',inputs:a,results:r,bom:bom.map(b=>({...b,totalMassG:b.qty*b.mass,totalCost:b.qty*b.price}))};const blob=new Blob([JSON.stringify(output,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download=($('projectName').value.trim()||'UAV_design').replace(/[^a-z0-9_-]+/gi,'_')+'_design.json';link.click();URL.revokeObjectURL(url)});
+</script></body></html>
