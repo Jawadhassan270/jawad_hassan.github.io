@@ -355,3 +355,9 @@ a:focus-visible,button:focus-visible,.project-image:focus-visible{outline:3px so
   .software-section .uav-calculator-graphic{border-right:0;border-bottom:1px solid var(--line);min-height:165px}
   .software-section .uav-calculator-plane{width:120px}
 }
+
+/* Actual uploaded cartoon illustration for UAV calculator project */
+.software-section .uav-calculator-feature{grid-template-columns:minmax(260px,1.1fr) minmax(0,1.35fr)}
+.software-section .uav-calculator-feature .uav-calculator-graphic{padding:0;min-height:250px;background:#eaf5f6;overflow:hidden;display:block}
+.software-section .uav-calculator-feature .uav-calculator-feature-image{position:static;inset:auto;width:100%;height:100%;min-height:250px;max-height:430px;display:block;object-fit:cover;object-position:center}
+@media(max-width:750px){.software-section .uav-calculator-feature{grid-template-columns:1fr}.software-section .uav-calculator-feature .uav-calculator-feature-image{min-height:0;max-height:none;height:auto;object-fit:contain}}
